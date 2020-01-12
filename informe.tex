@@ -200,6 +200,17 @@ Teniendo una imagen de temperatura superficial por día, se calculó el promedio
 
 \subsubsection{Preprocesamiento de veredas}
 
+Colombia, hasta el nivel de veredas, se encuentra administrativamente dividida en 3 niveles:
+
+- Nivel Superior: Departamentos.
+- Nivel Intermedio: Municipios.
+- Nivel Inferior: Veredas.
+
+El nivel en el que se encuentran los datos de producción de maíz es el de municipios, sin embargo, el dataset de municipios georreferenciados no se encuentra disponible en los datos abiertos ofrecidos por el Gobierno Colombiano, por tal razón, se han elegido los datos correspondientes a las veredas, que se encuentran a un nivel inferior y pueden ser transformados a un dataset georreferenciado de municipios en un simple paso.
+
+El dataset georreferenciado de veredas contiene asociado una base de datos, en donde cada vereda se encuentra dentro de un municipio. Al tener todas las veredas un municipio asociado, para datos geoespaciales se puede realizar la acción de 'disolver'. Disolver datos espaciales permite generar polígonos de mayor tamaño con respecto a una columna en común, por tal motivo, todas las verdeas que pertenezcan a un mismo municipio, se unirán y generarán un polígono más grande que corresponde a dicho municipio.
+
+
 \subsection{Metadatos}
 
 \subsection{Plan de Preservación}
