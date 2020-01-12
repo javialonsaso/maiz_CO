@@ -14,7 +14,7 @@
 
 %comandos para poner la bibliografía con estilo de cita harvard
 \renewcommand{\refname}{Referencias} %para que ponga referencias en el apartado de referencias y no el término en inglés
-\renewcommand{\citeform[1]}{\textcolor{blue}{#1}}% las citas en el texto salen de color azul
+\newcommand{\citeform[1]}{\textcolor{blue}{#1}}% las citas en el texto salen de color azul
 
 %líneas exclusivas de la implementación del estilo harvard
 %usepackage[sort&compress]{natbib}
@@ -41,12 +41,17 @@
 \section{Punto de partida del proyecto}
 
 Nuestros datasets:
-1. producción(formato csv) ;
+
+\begin{enumerate}
+\item Producción(formato csv) \newline
 https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5
-2. imágenes de temperatura (formato tiff, imagen georeferenciada);
-https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MOD11A1
-3.polígonos de veredas que contienen municipios (formato shp).
+
+\item Imágenes de temperatura (formato tiff, imagen georeferenciada) \newline
+https://developers.google.com/earth-engine/datasets/catalog/MODIS\_006\_MOD11A1
+
+\item Polígonos de veredas que contienen municipios (formato shp) \newline
 https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/descarga-nivel-de-referencia-de-veredas/
+\end{enumerate}
 
 \section{Descripción general del proyecto}
 
@@ -169,6 +174,25 @@ mirar metadados sil
 
 - ¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
 
+
+\section{Plan de preservación de los datos}
+Los archivos de datos serán almacenados en 3 repositorios distintos. Cada repositorio representará un nivel distinto de accesibilidad y rapidez de lectura y sobrescritura. Se creará un plan para almacenar los datos durante los próximos 20 años. En este periodo de tiempo los datos están sujetos a cambios según la calidad de ellos pueda mejorar.
+
+El primer repositorio será de acceso público y en la nube para que cualquier usuario de la comunidad pueda acceder a los datos \textit{on the go}. Usaremos la plataforma de github para almacenar los datos. De esta forma, la comunidad puede participar libremente en la conservación, calidad y contraste de los datos con otras fuentes. Los datos se actualizarán como mínimo cada 6 meses.
+
+En el segundo nivel utilizaremos discos duros para almacenar los datos y los resultados. Utilizaremos la interfaz SATA puesto que es el más rentable cuanto a espacio. Se montarán sobre una arquitectura RAID 6. De esta forma podemos garantizar la protección de los datos por imperfecciones en los discos utilizando paridad por bloques de memoria en el disco.
+
+Este repositorio será de acceso exclusivo para los colaboradores del proyecto y será revisado de forma periódica anualmente en función de los cambios realizados sobre el primero subido a la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
+
+El último nivel se usarán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros).
+
+% https://www.backupworks.com/LTO1-Ultrium-Tape-Media.aspx
+
+
+El último repositorio s
+
+El repositorio en la plataforma github.com servirá para obtener los datos rápidamente. Además, la comunidad puede contribuir en mantener y contrastar los datos con otras fuentes. 
+% https://en.wikipedia.org/wiki/Magnetic_tape_data_storage
 
 
 
