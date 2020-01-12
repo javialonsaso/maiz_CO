@@ -14,7 +14,7 @@
 
 %comandos para poner la bibliografía con estilo de cita harvard
 \renewcommand{\refname}{Referencias} %para que ponga referencias en el apartado de referencias y no el término en inglés
-\newcommand{\citeform[1]}{\textcolor{blue}{#1}}% las citas en el texto salen de color azul
+\renewcommand{\citeform[1]}{\textcolor{blue}{#1}}% las citas en el texto salen de color azul
 
 %líneas exclusivas de la implementación del estilo harvard
 %usepackage[sort&compress]{natbib}
@@ -42,16 +42,12 @@
 
 Nuestros datasets:
 
-\begin{enumerate}
-\item Producción(formato csv) \newline
+1. producción(formato csv)
 https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5
-
-\item Imágenes de temperatura (formato tiff, imagen georeferenciada) \newline
-https://developers.google.com/earth-engine/datasets/catalog/MODIS\_006\_MOD11A1
-
-\item Polígonos de veredas que contienen municipios (formato shp) \newline
+2. imágenes de temperatura (formato tiff, imagen georeferenciada);
+https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MOD11A1
+3.polígonos de veredas que contienen municipios (formato shp).
 https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/descarga-nivel-de-referencia-de-veredas/
-\end{enumerate}
 
 \section{Descripción general del proyecto}
 
@@ -68,6 +64,7 @@ Conforme aumente la temperatura se espera una producción mayor , con una temper
 \subsection{Requisitos}
 
 Requisitos: aquí hablamos sobre los datos que tenemos (es nuestro punto de partida, de arriba, lo que hemos puesto de los formatos y a qué queremos llegar a partir de ellos).
+
 1. producción: cadena productiva de maíz. En este csv podemos encontrar el rendimiento de la producción de Zea mays (maíz) en unidades de toneladas/hectárea por cada municipio de Colombia. Los datos se dividen por semestres.
 2. imágenes de temperatura: temperatura por vereda (más pequeño que un municipio, un municipio se divide en veredas) para cada día. Para cada día tenemos una temperatura máxima y otra mínima. (importante: la necesitamos semestralmente porque los datos de la cosecha están por semestres, para ello hacemos una media de cada día, y después con las medias de todos los días, hacemos la media de cada semestre, obteniendo así 2 temperaturas por año)
 3. polígonos de veredas que contienen municipios: tenemos las temperaturas por vereda, y la producción por municipio. Entonces debemos agrupar las temperaturas de las veredas a cada respectivo municipio para ya tener las temperaturas semestrales por municipio.
@@ -76,14 +73,24 @@ Requisitos: aquí hablamos sobre los datos que tenemos (es nuestro punto de part
 
 (describir aquí las condiciones de cultivo del maiz por encima, entre otras cosas los 94 días que dura el ciclo de cultivo del maíz).
 
-En caso de no disponer de los datos mediante bases de datos en abierto necesitaríamos de: 
-- Tiempo de cosecha, de sembrar.
-- Tiempo para recoger la producción de cada cosecha.
-- Conocer el rango de temperaturas adecuado para el crecimiento del maíz.
-- Sistema de riego optimizado para las cosechas.
-- Instalación de las estaciones metereológicas que nos permitan cuantificar la temperatura.
-- Puesta en marcha de las estaciones meterorológicas.
-- Análisis químico del suelo para determinar las necesidades nutricionales del mismo, y elegir un abono u otro para la siembra. 
+Para poder generar las fuentes de datos necesarias para el proyecto es necesario establecer el cultivo del maíz en las diferentes regiones de Colombia, para ello se deberá disponer lo siguiente:
+
+- Contratación de personal cualificado para el cultivo (agricultores).
+
+- Un calendario de siembra y cosecha para el cultivo adaptado a cada región de Colombia e información sobre la temperatura adecuada para el desarrollo del maíz.
+
+Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: 
+ZAE1, ZAE2, ZAE3, ZAE4, ZAE5  y ZAE6, esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha. Planteándose el siguiente calendario para la siembra:
+
+y el siguiente calendario para la cosecha: 
+
+- Análisis químico del suelo en cada una de las zonas geográficas para determinar las necesidades nutricionales del mismo y por tanto los complementos necesarios para el desarrollo del cultivo del maíz. Estos complementos se tendrán en cuenta en la elección del abono apropiado para el campo de cultivo.
+
+- Sistema de riego optimizado para aquellas regiones donde las precipitaciones son escasas.
+
+- Contratación del servicio de estaciones meteorológicas con el gobierno de Colombia para disponer de los datos de temperatura de las regiones durante el transcurso del cultivo. 
+
+- Contratación del servicio de imágenes de satélite con el gobierno de Colombia con el objeto de delimitar el área de las regiones a estudiar. 
 
 \subsection{Descripción del problema}
 
@@ -130,7 +137,7 @@ los formatos en los que se han recogido los datos han sido los siguientes:
 
 - ...
 
-\subsubsection{Data Management plan}
+\subsection{Data Management plan}
 
 1. Data summary
 
@@ -174,25 +181,53 @@ mirar metadados sil
 
 - ¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
 
+\subsection{Curación de Datos y ETL}
 
-\section{Plan de preservación de los datos}
-Los archivos de datos serán almacenados en 3 repositorios distintos. Cada repositorio representará un nivel distinto de accesibilidad y rapidez de lectura y sobrescritura. Se creará un plan para almacenar los datos durante los próximos 20 años. En este periodo de tiempo los datos están sujetos a cambios según la calidad de ellos pueda mejorar.
+Las tres fuentes de datos tuvieron que pasar por un proceso de curación y posteriormente por un proceso ETL para obtener una base de datos limpia y lista para realizar cualquier tipo de análisis sobre ella.
 
-El primer repositorio será de acceso público y en la nube para que cualquier usuario de la comunidad pueda acceder a los datos \textit{on the go}. Usaremos la plataforma de github para almacenar los datos. De esta forma, la comunidad puede participar libremente en la conservación, calidad y contraste de los datos con otras fuentes. Los datos se actualizarán como mínimo cada 6 meses.
+\subsubsection{Preprocesamiento de imágenes}
 
-En el segundo nivel utilizaremos discos duros para almacenar los datos y los resultados. Utilizaremos la interfaz SATA puesto que es el más rentable cuanto a espacio. Se montarán sobre una arquitectura RAID 6. De esta forma podemos garantizar la protección de los datos por imperfecciones en los discos utilizando paridad por bloques de memoria en el disco.
+Las imágenes georreferenciadas de temperatura superficial, obtenidas a partir del producto MOD11A1, del sensor MODIS abordo del satélite de la NASA Terra EOS AM-1, fueron las primeras en preprocesarse, ya que era necesario adecuar la temporalidad de estos datos (diaria) a la temporalidad de los datos de producción (semestral).
 
-Este repositorio será de acceso exclusivo para los colaboradores del proyecto y será revisado de forma periódica anualmente en función de los cambios realizados sobre el primero subido a la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
+Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, conocidas como bandas, de las cuales se utilizaron dos:
 
-El último nivel se usarán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros).
+1. LST_Day_1km
+2. LST_Night_1km
 
-% https://www.backupworks.com/LTO1-Ultrium-Tape-Media.aspx
+Estas bandas contienen la información de la temperatura diaria de la superficie terrestre de día y de noche repartidas en una grilla de 1 km. Ambas bandas fueron utilizadas como temperatura superficial mínima y temperatura superficial máxima y con ellas calcular la temperatura superficial media por cada valor de pixel de la grilla. De manera adicional, la temperatura, que se encontraba en grados Kelvin, fue convertida a grados centigrados.
 
+Teniendo una imagen de temperatura superficial por día, se calculó el promedio por cada pixel de la grilla se manera semestral desde el año 2015 hasta el primer semestre del año 2018 (fecha hasta la cual se encuentran disponibles los datos de producción de maíz). Por tal motivo se redujo la cantidad de imágenes diarias a 7 imágenes correspondientes a la temperatura superficial media semestral de los años correspondientes para la cobertura espacial de Colombia.
 
-El último repositorio s
+\subsubsection{Preprocesamiento de veredas}
 
-El repositorio en la plataforma github.com servirá para obtener los datos rápidamente. Además, la comunidad puede contribuir en mantener y contrastar los datos con otras fuentes. 
-% https://en.wikipedia.org/wiki/Magnetic_tape_data_storage
+Colombia, hasta el nivel de veredas, se encuentra administrativamente dividida en 3 niveles:
+
+- Nivel Superior: Departamentos.
+- Nivel Intermedio: Municipios.
+- Nivel Inferior: Veredas.
+
+El nivel en el que se encuentran los datos de producción de maíz es el de municipios, sin embargo, el dataset de municipios georreferenciados no se encuentra disponible en los datos abiertos ofrecidos por el Gobierno Colombiano, por tal razón, se han elegido los datos correspondientes a las veredas, que se encuentran a un nivel inferior y pueden ser transformados a un dataset georreferenciado de municipios en un simple paso.
+
+El dataset georreferenciado de veredas contiene asociado una base de datos, en donde cada vereda se encuentra dentro de un municipio. Al tener todas las veredas un municipio asociado, para datos geoespaciales se puede realizar la acción de 'disolver'. Disolver datos espaciales permite generar polígonos de mayor tamaño con respecto a una columna en común, por tal motivo, todas las verdeas que pertenezcan a un mismo municipio, se unirán y generarán un polígono más grande que corresponde a dicho municipio.
+
+\subsubsection{Extracción de Temperatura Superficial por Municipio}
+
+Teniendo el dataset georreferenciado de municipios, ahora es posibles extraer, por cada imagen georreferenciada, el promedio de temperatura superficial para cada uno de los municipios como el promedio de todos los pixeles de la grilla que se encuentren contenidos o que toquen el polígono georreferenciado de un municipio en concreto.
+
+Esta extracción de temperatura superficial por municipio genera una columna adicional a la base de datos del dataset de municipios georreferenciados correspondiente al valor de temperatura superficial de ese municipio, y una columna adicional del semestre y el año correspondientes a dicha temperatura.
+
+\subsubsection{Unión con Datos de Producción}
+
+Los municipios se encuentran identificados por un código en la base de datos de producción, mientras qe la columna de 'periodo' nos indica el semestre y el año al que se encuentran asociados los datos de producción. En la base de datos de la temperatura superficial extraída, los municipios se encuentran identificados por el mismo código de municipio, mientras que existe una columna relativa a la columna 'periodo' de la base de datos de producción.
+
+Para unir ambas tablas, se creó un índice en cada una como la concatenación del código del municipio con el periodo al que corresponde los datos de producción o de temperatura superficial en el caso contrario. Dicho código fue utilizado como indicador del 'Join' entre ambas tablas para obtener una tabla completa con los datos asociaodos de producción, municipios, departamentos y temperatura según el periodo de estudio y sobre la cual podrían empezarse todo tipo de análisis.
+
+\subsection{Metadatos}
+
+\subsection{Plan de Preservación}
+
+\subsection{Análisis de los Datos}
+
 
 
 
