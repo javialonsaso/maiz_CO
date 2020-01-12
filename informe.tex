@@ -194,7 +194,7 @@ Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, con
 1. LST_Day_1km
 2. LST_Night_1km
 
-Estas bandas contienen la información de la temperatura diaria de la superficie terrestre de día y de noche repartidas en una grilla de 1 km. Ambas bandas fueron utilizadas como temperatura superficial mínima y temperatura superficial máxima y con ellas calcular la temperatura superficial media por cada valor de pixel de la grilla.
+Estas bandas contienen la información de la temperatura diaria de la superficie terrestre de día y de noche repartidas en una grilla de 1 km. Ambas bandas fueron utilizadas como temperatura superficial mínima y temperatura superficial máxima y con ellas calcular la temperatura superficial media por cada valor de pixel de la grilla. De manera adicional, la temperatura, que se encontraba en grados Kelvin, fue convertida a grados centigrados.
 
 Teniendo una imagen de temperatura superficial por día, se calculó el promedio por cada pixel de la grilla se manera semestral desde el año 2015 hasta el primer semestre del año 2018 (fecha hasta la cual se encuentran disponibles los datos de producción de maíz). Por tal motivo se redujo la cantidad de imágenes diarias a 7 imágenes correspondientes a la temperatura superficial media semestral de los años correspondientes para la cobertura espacial de Colombia.
 
@@ -210,6 +210,11 @@ El nivel en el que se encuentran los datos de producción de maíz es el de muni
 
 El dataset georreferenciado de veredas contiene asociado una base de datos, en donde cada vereda se encuentra dentro de un municipio. Al tener todas las veredas un municipio asociado, para datos geoespaciales se puede realizar la acción de 'disolver'. Disolver datos espaciales permite generar polígonos de mayor tamaño con respecto a una columna en común, por tal motivo, todas las verdeas que pertenezcan a un mismo municipio, se unirán y generarán un polígono más grande que corresponde a dicho municipio.
 
+\subsubsection{Extracción de Temperatura Superficial por Municipio}
+
+Teniendo el dataset georreferenciado de municipios, ahora es posibles extraer, por cada imagen georreferenciada, el promedio de temperatura superficial para cada uno de los municipios como el promedio de todos los pixeles de la grilla que se encuentren contenidos o que toquen el polígono georreferenciado de un municipio en concreto.
+
+Esta extracción de temperatura superficial por municipio genera una columna adicional a la base de datos del dataset de municipios georreferenciados correspondiente al valor de temperatura superficial de ese municipio, y una columna adicional del semestre y el año correspondientes a dicha temperatura.
 
 \subsection{Metadatos}
 
