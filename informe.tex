@@ -216,6 +216,12 @@ Teniendo el dataset georreferenciado de municipios, ahora es posibles extraer, p
 
 Esta extracción de temperatura superficial por municipio genera una columna adicional a la base de datos del dataset de municipios georreferenciados correspondiente al valor de temperatura superficial de ese municipio, y una columna adicional del semestre y el año correspondientes a dicha temperatura.
 
+\subsubsection{Unión con Datos de Producción}
+
+Los municipios se encuentran identificados por un código en la base de datos de producción, mientras qe la columna de 'periodo' nos indica el semestre y el año al que se encuentran asociados los datos de producción. En la base de datos de la temperatura superficial extraída, los municipios se encuentran identificados por el mismo código de municipio, mientras que existe una columna relativa a la columna 'periodo' de la base de datos de producción.
+
+Para unir ambas tablas, se creó un índice en cada una como la concatenación del código del municipio con el periodo al que corresponde los datos de producción o de temperatura superficial en el caso contrario. Dicho código fue utilizado como indicador del 'Join' entre ambas tablas para obtener una tabla completa con los datos asociaodos de producción, municipios, departamentos y temperatura según el periodo de estudio y sobre la cual podrían empezarse todo tipo de análisis.
+
 \subsection{Metadatos}
 
 \subsection{Plan de Preservación}
