@@ -11,6 +11,45 @@
 \usepackage{subcaption}
 \renewcommand{\tablename}{Tabla}
 \renewcommand{\figurename}{Figura}
+\usepackage{listings}
+\usepackage{afterpage}
+\usepackage{color}
+\usepackage{here}
+\usepackage{tcolorbox}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{framed, color}
+\textheight=21cm
+\textwidth=17cm
+\topmargin=-1cm
+\oddsidemargin=0cm
+\parindent=0mm
+\pagestyle{plain}
+
+\begin{document}
+\begin{titlepage}
+	\centering
+	\includegraphics[width=1\textwidth]{header.jpg}\par\vspace{1cm}
+	\vspace{1cm}
+	{\LARGE\bfseries \textsc{Proyecto de Ciclo de Vida de los Datos}\par}
+	
+	\noindent\rule{15cm}{1pt}
+	\vspace{3cm}
+	
+	{\Large \textbf{Análisis de la relación entre la temperatura, localización geográfica y rendimiento en la producción de \textit{Zea mays} en Colombia}\par}
+	\vfill
+	\begin{flushright}
+	{\large \textsc{Enero de 2020}} \\
+	\vspace{\baselineskip}
+	 \begin{align*}
+	 \hspace{8.5cm}& & & &\text{Alumno (1):} &\ \text{David Montero Loaiza}\\
+	 \hspace{8.5cm}& & & &\text{Alumna (2):} &\ \text{Ana González Guerra}\\
+	& & & &\text{Alumno (3):} &\ \text{Javier Alonso del Saso}\\
+	& & & &\text{Alumna (4):} &\ \text{Silvia Magdalena López Monzó}\\
+	 \end{align*}
+	\end{flushright}
+\end{titlepage}
 
 %comandos para poner la bibliografía con estilo de cita harvard
 \renewcommand{\refname}{Referencias} %para que ponga referencias en el apartado de referencias y no el término en inglés
@@ -22,15 +61,14 @@
 %\setcitestyle{authoryear,open={(},close={)}}
 
 \renewcommand{\contentsname}{Índice}
-\usepackage{listings}
-\usepackage{afterpage}
+
 \pagestyle{headings}%este estilo de página permite imprimir el nombre del capítulo o sección que se está procesando en la cabecera junto con el número de página en el lado opuesto, permaneciendo el pie de página vacio.
-\usepackage{color}
+
 \setlength{\parskip}{1em} %con esta línea dejamos una línea en blanco entre párrafos
 
 
 
-\begin{document}
+
 
 \pagenumbering{roman}
 \tableofcontents 
@@ -40,74 +78,90 @@
 
 \section{Punto de partida del proyecto}
 
-Nuestros datasets:
+En el siguiente trabajo, presentaremos resultados obtenidos y analizados a partir de tres fuentes de datos en abierto. Estas fuentes serán los siguientes datasets:
 
-1. producción(formato csv)
-https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5
-2. imágenes de temperatura (formato tiff, imagen georeferenciada);
-https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MOD11A1
-3.polígonos de veredas que contienen municipios (formato shp).
-https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/descarga-nivel-de-referencia-de-veredas/
+\begin{itemize}
+    \item Producción del maíz en Colombia \cite{ref1}
+    
+    \item Imágenes de temperatura a escala global \cite{ref2} 
+    
+    \item Polígonos de veredas de Colombia, donde un conjunto de veredas define un municipio \cite{ref3}
+\end{itemize}
+
 
 \section{Descripción general del proyecto}
 
 \subsection{Objetivos}
 
-Comparar la producción de Zea mays (maíz) en función de la temperatura entre los diferentes municipios de Colombia (serán las áreas de producción). Para comparar la producción usaremos el cociente de toneladas producidas por hectárea (rendimiento). También compararemos la eficiencia de la tierra (proporción del terreno sembrado que genera producto)
+El objetivo principal del proyecto es obtener la dependencia de la producción de Zea mays (maíz) con la temperatura de las diferentes áreas de producción localizadas en municipios de Colombia. Para comparar dicha producción, usaremos el cociente de toneladas producidas por hectárea, que definiremos como rendimiento. También compararemos la proporción del terreno sembrado que genera producto que definiremos como eficiencia de la tierra.
 
-Todo ello para determinar la zona(municipio) y temperatura de mayor producción de zea mays en Colombia.
+Todo ello para determinar la zona (o municipio) y temperatura de mayor producción de zea mays en Colombia.
 
 \subsection{Resultados esperados}
+Como primera aproximación, esperamos que a medida la temperatura aumente, también lo haga la producción, con una temperatura óptima asociada a una máxima producción de unos 25ºC. A temperaturas inferiores el rendimiento es menor llegando a una producción nula para temperaturas muy bajas.
 
-Conforme aumente la temperatura se espera una producción mayor , con una temperatura asociada a una máxima producción de unos 25 grados centígrados. A temperaturas inferiores el rendimiento es menor llegando a una producción nula para temperaturas muy bajas.
+\newpage
 
 \subsection{Requisitos}
 
-Requisitos: aquí hablamos sobre los datos que tenemos (es nuestro punto de partida, de arriba, lo que hemos puesto de los formatos y a qué queremos llegar a partir de ellos).
+A continuación, desarrollaremos las funcionalidad de cada uno de los datasets introducidos anteriormente.
 
-1. producción: cadena productiva de maíz. En este csv podemos encontrar el rendimiento de la producción de Zea mays (maíz) en unidades de toneladas/hectárea por cada municipio de Colombia. Los datos se dividen por semestres.
-2. imágenes de temperatura: temperatura por vereda (más pequeño que un municipio, un municipio se divide en veredas) para cada día. Para cada día tenemos una temperatura máxima y otra mínima. (importante: la necesitamos semestralmente porque los datos de la cosecha están por semestres, para ello hacemos una media de cada día, y después con las medias de todos los días, hacemos la media de cada semestre, obteniendo así 2 temperaturas por año)
-3. polígonos de veredas que contienen municipios: tenemos las temperaturas por vereda, y la producción por municipio. Entonces debemos agrupar las temperaturas de las veredas a cada respectivo municipio para ya tener las temperaturas semestrales por municipio.
+\begin{itemize}
+    \item Dataset de la cadena productiva de maíz: en este csv podemos encontrar el rendimiento de la producción de Zea mays (maíz) en unidades de toneladas/hectárea por cada municipio de Colombia. Los datos se encuentran divididos por semestres, es decir, tenemos un dato por cada seis meses.
+    
+    \item Imágenes de la temperatura: podemos observar la temperatura diara en cada vereda de Colombia, donde un conjunto de veredas constituye un municipio. Para cada día tenemos una temperatura máxima y una temperatura mínima. Es importante darse cuenta de que como los datos de rendimiento están por semestres, será necesario sacar una temperatura media semestral. Por tanto, haremos la media de la temperatura máxima y mínima para cada día, y después realizaremos otra media para obtener dos temperaturas semetrales al año.
+    
+    \item Dataset con los polígonos de veredas: el gobierno colombiano no dispone libremente los datos georreferenciados de municipios del país, no obstante, dispone los de veredas, que se encuentran administrativamente en un nivel inferior y por los cuales se pueden obtener los municipios y concordar así con los datos de producción de maíz, que se encuentran por municipios.
+\end{itemize}
+
 
 \subsection{Requerimientos técnicos}
-
-(describir aquí las condiciones de cultivo del maiz por encima, entre otras cosas los 94 días que dura el ciclo de cultivo del maíz).
-
 Para poder generar las fuentes de datos necesarias para el proyecto es necesario establecer el cultivo del maíz en las diferentes regiones de Colombia, para ello se deberá disponer lo siguiente:
 
-- Contratación de personal cualificado para el cultivo (agricultores).
+\begin{itemize}
+    \item Contratación de personal cualificado para el cultivo (agricultores).
+    \item Calendario de siembra para el cultivo adaptado a cada región de Colombia.
+    
+Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) \cite{ref4}, esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
 
-- Un calendario de siembra y cosecha para el cultivo adaptado a cada región de Colombia e información sobre la temperatura adecuada para el desarrollo del maíz.
+Planteándose el siguiente calendario para la siembra:
 
-Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: 
-ZAE1, ZAE2, ZAE3, ZAE4, ZAE5  y ZAE6, esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha. Planteándose el siguiente calendario para la siembra:
+\begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}|  }
+\hline
+\multicolumn{3}{|c|}{Calendario de siembra de \textit{Zea mays} en Colombia} \\
+\hline
+Región & Período de siembra & Referencia  \\
+\hline
+ZAE1 & Abril; septiembre &  \\
+ZAE2 & Marzo  &  \\
+ZAE3 & Marzo; septiembre & modificado de \cite{ref4} \\
+ZAE4; ZAE5; ZAE6 & Febrero; septiembre &  \\
+\hline
+\end{tabular}
 
-y el siguiente calendario para la cosecha: 
+Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días \cite{ref5}.
 
-- Análisis químico del suelo en cada una de las zonas geográficas para determinar las necesidades nutricionales del mismo y por tanto los complementos necesarios para el desarrollo del cultivo del maíz. Estos complementos se tendrán en cuenta en la elección del abono apropiado para el campo de cultivo.
+\item Análisis químico del suelo en cada una de las zonas geográficas con el objetivo de determinar las necesidades nutricionales del mismo y por tanto los complementos necesarios para el desarrollo del cultivo del maíz. Estos complementos se tendrán en cuenta en la elección del abono apropiado para el campo de cultivo.
 
-- Sistema de riego optimizado para aquellas regiones donde las precipitaciones son escasas.
+\item Sistema de riego optimizado para aquellas regiones donde las precipitaciones son escasas.
 
-- Contratación del servicio de estaciones meteorológicas con el gobierno de Colombia para disponer de los datos de temperatura de las regiones durante el transcurso del cultivo. 
+\item Contratación del servicio de estaciones meteorológicas con el gobierno de Colombia para disponer de los datos de temperatura de las regiones durante el transcurso del cultivo.
 
-- Contratación del servicio de imágenes de satélite con el gobierno de Colombia con el objeto de delimitar el área de las regiones a estudiar. 
+\item Contratación del servicio de imágenes de satélite con el gobierno de Colombia con el objetivo de delimitar los municipios donde se pretende efectuar el análisis. 
+
+\end{itemize}
 
 \subsection{Descripción del problema}
 
 \subsubsection{Interés}
 
-- Importancia y usos del cultivo del maiz.
+El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio \cite{ref5}. 
+Es por esto que consideramos de interés la optimización de su producción, concretamente queremos centrarnos en los pequeños agricultores, pretendemos proporcionarles un método para empezando desde cero con el cultivo asegurar que las condiciones de este son óptimas. Así con una producción inicial estable sería posible ampliar la producción, y podrían hacerlo aplicando de nuevo el método usado.
 
-- Qué es Zea mays, en qué se diferencia del maiz original, por qué es tan importante en Colombia.
+Por tanto, el problema a enfocar en este proyecto es encontrar el municipio de Colombia óptimo para la producción de \textit{Zea Mays}, además de la temperatura asociada para dicha producción óptima. En definitiva, optimizar la producción de maíz en Colombia eligiendo la mejor región de producción en base a la variable temperatura.
 
-- Qué ventajas tiene Zea mays respecto al maíz original. 
+La razón de la elección de la temperatura como variable principal en el análisis se basa en que es esencial para el desarrollo del maíz \cite{ref10}
 
-- Colombia, condiciones ideales para el cultivo de Zea mays en general, teniendo en cuenta esto elegir la mejor zona si se dispone de recursos limitados, por ejemplo solo se puede abarcar terreno en uno de los municipios, para así asegurar la producción más efectiva a nivel geográfico, decidiendo esto en base a la condición temperatura de la zona, pues parece ser que en Colombia es un aspecto muy variable entre las diferentes regiones.
-
-El problema a enfocar es encontrar el municipio de Colombia óptimo para la producción de Zea Mays, además de la temperatura asociada para dicha producción óptima. En definitiva, optimizar la producción de maíz en Colombia eligiendo la mejor región de producción.
-        
-(TEMPORAL) 
-El cambio climático es un problema global que afecta a varios sectores de la industria. En específico, la alimentaria es una de las más relevantes y la que es más afectada por cambios en la climatología. Comprender el estado actual de la producción agrícola teniendo en cuenta. Javi? qué querías decir aquí?
 
 \subsubsection{Cobertura (geográfica, temporal)}
 
@@ -125,141 +179,237 @@ Parafrasear los objetivos del principio.
 
 Los datos han sido extraídos de las siguientes bases de datos en abierto: 
 
-- Base de datos en abierto del gobierno de Colombia (https://www.datos.gov.co/). Concretamente los datos de producción han sido oobtenidos de la división de agricultura y desarrollo rural.
+- Base de datos en abierto del gobierno de Colombia \cite{ref1}. Concretamente los datos de producción han sido oobtenidos de la división de agricultura y desarrollo rural.
 
-- The Land Processes Distributed Active Center (LP DACC), que es una base de datos en abierto englobada dentro del sistema de observación de la NASA (NASA Earth Observing System Data and Information System, EOSDIS) en la división USGS Earth Resources Observation and Science (EROS) (https://lpdaac.usgs.gov/).
+- The Land Processes Distributed Active Center (LP DACC), que es una base de datos en abierto englobada dentro del sistema de observación de la NASA (NASA Earth Observing System Data and Information System, EOSDIS) en la división USGS Earth Resources Observation and Science (EROS) \cite{ref2}.
 
-- Geoportal del Departamento Aministrativo Nacional de Estadística de Colombia (DANE) (https://geoportal.dane.gov.co/)
+- Geoportal del Departamento Aministrativo Nacional de Estadística de Colombia (DANE), en particular tomamos los datos de polígnos de veredas que dividen por regiones a Colombia\cite{ref3}.
 
-los formatos en los que se han recogido los datos han sido los siguientes:
+Los formatos en los que se han recogido los datos han sido los siguientes:
+\begin{itemize}
+    \item Producción de maíz en Colombia: formato csv (comma-separated values).
+    \item Imágenes de temperatura: formato tiff (Tagged Image File Format) por ser imágenes georreferenciadas.
+    \item Polígonos de veredas en Colombia: formato shp, es decir, formato de archivo informático (shapefile) que almacena las entidades geométricas de los objetos
+\end{itemize}
 
-- .csv para los datos de producción.
+\section{Data Management Plan}
 
-- ...
+A continuación, describimos el plan de gestión de los datos, en el que explicaremos cómo se han creado los datos, se detallará cómo se documentarán, quién podrá obtenerlos y cómo. Se especificará cómo serán almacenados y si serán comparados. 
 
-\subsection{Data Management plan}
+Para ello, seguiremos el plan desarrollado en la convocatoria del H2020 \cite{ref6}. Siguiendo el template desarrollado en la convocatoria del documento del H2020 crearemos unos datos FAIR : Findable, Accessible, Interoperable, Re-usable. Por tanto, los datos creados podrán ser identificados con metadatos accesibles y legibles tanto por máquinas como por personas, gracias al uso de protocolos estándarizados. Y finalmente, estarán bien descritos mediante unos metadatos bien explicados. 
 
-1. Data summary
+\subsection{Data summary}
 
-- Propósito de la recogida / generación de datos y su relación con los objetivos del proyecto.
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\begin{shaded}
+Propósito de la recogida / generación de datos y su relación con los objetivos del proyecto.
+\end{shaded}
 
-Encontrar una relación entre temperatura y rendimiento de la producción de maíz que permita decidir cuál es el mejor municipio de Colombia para alcanzar una mayor producción de maíz.
+El propósito de la recogida y generación de datos es determinar la temperatura y zona de producción óptima de Maíz en Colombia.
+Encontrar una relación entre temperatura y rendimiento de la producción de maíz que permita decidir cuál es el mejor municipio de Colombia para alcanzar una mayor producción de maíz.\\
 
-- ¿Qué tipos y formatos de datos generará o recogerá  el proyecto?
+\begin{shaded}
+¿Qué tipos y formatos de datos generará o recogerá  el proyecto?
 
-- ¿Usaremos datos ya existentes? ¿cómo?
+\end{shaded}
 
-Los datos a usar no van a ser datos ya existentes, pues comenzaremos el proceso desde 0, desde el sembrado, pasando por la instalación de las estaciones metereológicas que nos permitirán controlar la temperatura hasta la toma de imágenes de satélite de los municipios de Colombia estudiados.
+Los tipos de datos recogidos  y generados para el proyecto encajan dentro del ámbito de la ciencia de datos, concretamente en las secciones de curación y análisis.
 
-- ¿Cuál es el origen de los datos?
+En cuanto a los formatos en que se han recogido los datos:
 
-Los datos no tienen un único origen, provienen de tres fuentes diferentes: estaciones meteorológicas, análisis de la producción de maiz e imágenes de satélite de las regiones estudiadas. 
+\begin{itemize}
+    \item Producción de maíz en Colombia: formato csv.
+    \item Imágenes de temperatura georreferenciadas para Colombia: formato tiff.
+    \item Polígonos de veredas en Colombia: formato shp.
+\end{itemize}
 
-poner por aquí que cada una de estas ramas de datos ha sido depositada en el repositorio correspondiente: gobierno de colombia, dane , etc.
+Por otra parte el formato de los datos generados es de jupyter notebook, de cara a facilitar la lectura e interpretación del análisis realizado.
 
-- ¿Cuál es el tamaño esperado de los datos?
-no entiendo a qué se refiere con esto.
-- ¿Para quién podrían ser útiles estos datos?
 
+\begin{shaded}
+¿Usaremos datos ya existentes? ¿cómo?
+\end{shaded}
+Los datos a usar no van a ser datos ya existentes, pues comenzaremos el proceso desde 0, desde el sembrado y cosechado del maíz, pasando por la contratación de los serviciós de las estaciones meteorológicas  que nos permitirán la toma de datos de temperatura y de la obtención de imágenes vía satélite de los municipios de Colombia con el gobierno colombiano.
+
+Los paquetes de trabajo y el personal implicados en la obtención y generación de los datos del proyecto aparecen detallados en el diagrama de Gantt.
+
+\begin{shaded}
+¿Cuál es el origen de los datos?
+\end{shaded}
+Los datos no tienen un único origen, provienen de tres fuentes diferentes: estaciones meteorológicas, análisis de la producción de maiz e imágenes de satélite de las regiones estudiadas.
+
+\begin{shaded}
+¿Cuál es el tamaño esperado de los datos?
+\end{shaded}
+
+Para calcular el tamaño esperado de los datos hemos partido de la base de que si cada imagen pesa 2.6 Mb, obteniendo una imágen diaria a lo largo de 3 años y medio, solamente con los datos asociados a las imágenes se generán 3.32 Gb. Por otra parte los datos de producción iniciales ocuparon 1Mb y los datos de veredas ocuparon 336 Mb. Si sumamos el tamaño de todos los datos comentados hasta ahora hace un total de 3.65Gb.
+
+Teniendo en cuenta que el análisis de los datos se basa mayormente en su gráficación, el tamaño de los datos derivados no debería ser superior a 10 Mb, el tamaño esperado de los datos es de 3.75Gb.
+
+\begin{shaded}
+¿Para quién podrían ser útiles estos datos?
+\end{shaded}
 Estos datos podrían ser útiles para pequeños agricultures interesados en comenzar a producir maíz, pues la relación temperatura-producción, les permitiría saber si una zona es óptima o no. Reduciendo con mucho el riesgo inicial de producción, no se arriesgan a sembrar en una zona no adaptada climatológicamente para la producción de maíz. Así en el plazo de un año podrían tener ganancias fijas que les permitiesen ampliar zona de cultivo en caso de ser necesario.
 
-También sería posible saber para una nueva zona, no tiene por qué ser uno de los municipios dados, conociendo su temperatura media si es adecuada o no para la producción.
 
-2. Fair Data
+\subsection{Fair Data}
 
-Hacer los datos accesibles, incluyendo metadatos
 
-- ¿Se pueden encontrar los datos producidos y / o usados en el proyecto con los metadados, identificables y localizables por medio de un mecanismo  de identificación estándar? (por ejemplo, identificadores persistentes y únicos como Digital Object Identifiers (DOIs)?
+%\fbox{otorrinolaringólogo}
 
-Los datos pueden ser encontrados en el repositorio de github(), junto con este informe en el que se describe su obtención, uso y análisis. 
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
 
-- ¿Qué convenciones de nombres se han seguido?
 
-- ¿Se proporcionan palabras clave para optimizar la posibilidades de reutilización?
+\textbf{Hacer los datos accesibles, incluyendo metadatos}
 
-mirar metadados sil
+\begin{shaded}
+¿Se pueden encontrar los datos producidos y / o usados en el proyecto con los metadados, identificables y localizables por medio de un mecanismo  de identificación estándar? (por ejemplo, identificadores persistentes y únicos como Digital Object Identifiers (DOIs)?
+\end{shaded}
+Los datos pueden ser encontrados en el siguiente repositorio de github: , junto con este informe en el que se describe su obtención, uso y análisis. 
 
-- ¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
+\begin{shaded}
+¿Qué convenciones de nombres se han seguido?
+\end{shaded}
 
-\subsection{Curación de Datos y ETL}
+La convención adoptada para el nombre de los metadatos se basa en el formato de metadatos Dublin Core. Dado que es un formato estandarizado, bien estructurado y sencillo de manejar.
+\begin{shaded}
+¿Se proporcionan palabras clave para optimizar la posibilidades de reutilización?
+\end{shaded}
+Las palabras claves proporcionadas son las siguientes: maíz, producción, rendimiento, Colombia, municipio, temperatura, dependencia.
+
+\begin{shaded}
+¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
+\end{shaded}
+Se han incluido los siguientes metadatos: título, creador, palabras clave, descripción, editor, contribuidor, fecha, tipo, formato, identificador, fuente, idioma, cobertura y derechos.
+
+
+\textbf{Hacer los datos accesibles}
+
+\begin{shaded}
+¿Qué datos producidos y/o utilizados en el proyecto se presentarán abiertamente? Si algunos datasets no pueden ser compartidos (o tienen que serlo bajo ciertas restricciones) explica por qué, separando claramente si el motivo es legal o voluntario. 
+\end{shaded}
+Se harán públicos los datos producidos y de los tres datasets utilizados, tan solo se harán públicos los correspondientes a las imágenes georreferenciadas y a los polígonos de veredas de Colombia, pero no el dataset de la producción de maíz debido a que recientemente el gobierno Colombiano denegó el acceso al público y ahora es un dataset privado. Por tanto, para respetar la medida del gobierno Colombiano, el dataset no se hará público.\\
+
+\begin{shaded}
+¿Cómo se harán accesible los datos?
+\end{shaded}
+Los datos serán accesibles mediante un repositorio github. La dirección de dicho repositorio se encuentra disponible como identificador en los metadatos.\\
+
+\begin{shaded}
+Si existe alguna restricción de uso del repositorio, ¿qué tipo de acceso se necesita? 
+\end{shaded}
+No existe ninguna restricción para el uso del respositorio, es de libre acceso.\\
+
+
+\begin{shaded}
+¿Son los datos producidos interoperables? Esto es que permiten el intercambio y reutilización entre investigadores, instituciones, organizaciones, países, etc. (es decir, se adhieren a los estándares de formatos y en la medida de lo posible, se adaptan con aplicaciones de software disponibles (abiertas) y, en particular, facilitan las combinaciones con diferentes conjuntos de datos de diferentes orígenes)
+\end{shaded}
+Todos los datos serán almacenados en distintos documentos con formato csv, por lo tanto, será fácilmente legible por máquinas independientemente del país o institución que pretenda usarlos.\\
+
+
+\begin{shaded}
+¿Qué tipo de metodología, estándares o vocabulario de metadata será usado para hacer que los datos sean interoperables?
+\end{shaded}
+Para describir los datos/metadatos del documento final, se han seguido los convenios del esquema Dublin Core. Estos metadatos han sido incluidos en inglés, para garantizar una mayor interoperabilidad.\\
+
+
+
+\begin{shaded}
+¿Qué licencia tendrán los datos para permitir la reutilización más amplia posible?
+\end{shaded}
+Nos apoyaremos en Atribución/Reconocimiento 4.0 Licencia Pública Internacional. Por lo tanto, el usuario es libre tanto de compartir, copiar, redistribuir el material tanto como de adaptar, trasnformar y crear a partir de dicho material.[https://creativecommons.org/licenses/by/4.0/deed.es_ES]\\
+
+
+\begin{shaded}
+¿Cuándo estarán disponibles los datos para su reutilización? Si se busca un embargo para dar tiempo a publicar o buscar patentes, especifique por qué y durante cuánto tiempo se aplicará, teniendo en cuenta que los datos de la investigación deben estar disponibles lo antes posible.
+\end{shaded}
+HELP\\
+
+\begin{shaded}
+¿Durante cuánto tiempo estarán los datos disponibles para su reúso?
+\end{shaded}
+Debido a que los datos se encuentrán disponibles en GitHub, deberían estar permanentemente allí, y si desaparecen, serán por razones ajenas a nosotros.
+
+\begin{shaded}
+¿Se describen los procesos de garantía de calidad de los datos?
+\end{shaded}
+JAVI ?????
+
+
+
+\section{Curación de Datos y ETL}
 
 Las tres fuentes de datos tuvieron que pasar por un proceso de curación y posteriormente por un proceso ETL para obtener una base de datos limpia y lista para realizar cualquier tipo de análisis sobre ella.
 
-\subsubsection{Preprocesamiento de imágenes}
+\subsection{Preprocesamiento de imágenes}
 
 Las imágenes georreferenciadas de temperatura superficial, obtenidas a partir del producto MOD11A1, del sensor MODIS abordo del satélite de la NASA Terra EOS AM-1, fueron las primeras en preprocesarse, ya que era necesario adecuar la temporalidad de estos datos (diaria) a la temporalidad de los datos de producción (semestral).
 
 Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, conocidas como bandas, de las cuales se utilizaron dos:
 
-1. LST_Day_1km
-2. LST_Night_1km
+1. LST\_Day\_1km \\
+2. LST\_Night\_1km
 
 Estas bandas contienen la información de la temperatura diaria de la superficie terrestre de día y de noche repartidas en una grilla de 1 km. Ambas bandas fueron utilizadas como temperatura superficial mínima y temperatura superficial máxima y con ellas calcular la temperatura superficial media por cada valor de pixel de la grilla. De manera adicional, la temperatura, que se encontraba en grados Kelvin, fue convertida a grados centigrados.
 
 Teniendo una imagen de temperatura superficial por día, se calculó el promedio por cada pixel de la grilla se manera semestral desde el año 2015 hasta el primer semestre del año 2018 (fecha hasta la cual se encuentran disponibles los datos de producción de maíz). Por tal motivo se redujo la cantidad de imágenes diarias a 7 imágenes correspondientes a la temperatura superficial media semestral de los años correspondientes para la cobertura espacial de Colombia.
 
-\subsubsection{Preprocesamiento de veredas}
+\subsection{Preprocesamiento de veredas}
 
 Colombia, hasta el nivel de veredas, se encuentra administrativamente dividida en 3 niveles:
 
-- Nivel Superior: Departamentos.
-- Nivel Intermedio: Municipios.
-- Nivel Inferior: Veredas.
+\begin{itemize}
+    \item Nivel superior: departamentos.
+    \item Nivel intermedio: municipios.
+    \item Nivel inferior: veredas.
+\end{itemize}
 
 El nivel en el que se encuentran los datos de producción de maíz es el de municipios, sin embargo, el dataset de municipios georreferenciados no se encuentra disponible en los datos abiertos ofrecidos por el Gobierno Colombiano, por tal razón, se han elegido los datos correspondientes a las veredas, que se encuentran a un nivel inferior y pueden ser transformados a un dataset georreferenciado de municipios en un simple paso.
 
 El dataset georreferenciado de veredas contiene asociado una base de datos, en donde cada vereda se encuentra dentro de un municipio. Al tener todas las veredas un municipio asociado, para datos geoespaciales se puede realizar la acción de 'disolver'. Disolver datos espaciales permite generar polígonos de mayor tamaño con respecto a una columna en común, por tal motivo, todas las verdeas que pertenezcan a un mismo municipio, se unirán y generarán un polígono más grande que corresponde a dicho municipio.
 
-\subsubsection{Extracción de Temperatura Superficial por Municipio}
+\subsection{Extracción de Temperatura Superficial por Municipio}
 
 Teniendo el dataset georreferenciado de municipios, ahora es posibles extraer, por cada imagen georreferenciada, el promedio de temperatura superficial para cada uno de los municipios como el promedio de todos los pixeles de la grilla que se encuentren contenidos o que toquen el polígono georreferenciado de un municipio en concreto.
 
 Esta extracción de temperatura superficial por municipio genera una columna adicional a la base de datos del dataset de municipios georreferenciados correspondiente al valor de temperatura superficial de ese municipio, y una columna adicional del semestre y el año correspondientes a dicha temperatura.
 
-\subsubsection{Unión con Datos de Producción}
+\subsection{Unión con Datos de Producción}
 
-Los municipios se encuentran identificados por un código en la base de datos de producción, mientras qe la columna de 'periodo' nos indica el semestre y el año al que se encuentran asociados los datos de producción. En la base de datos de la temperatura superficial extraída, los municipios se encuentran identificados por el mismo código de municipio, mientras que existe una columna relativa a la columna 'periodo' de la base de datos de producción.
+Los municipios se encuentran identificados por un código en la base de datos de producción, mientras que la columna de ``periodo'' nos indica el semestre y el año al que se encuentran asociados los datos de producción. En la base de datos de la temperatura superficial extraída, los municipios se encuentran identificados por el mismo código de municipio, mientras que existe una columna relativa a la columna ``periodo''  de la base de datos de producción.
 
-Para unir ambas tablas, se creó un índice en cada una como la concatenación del código del municipio con el periodo al que corresponde los datos de producción o de temperatura superficial en el caso contrario. Dicho código fue utilizado como indicador del 'Join' entre ambas tablas para obtener una tabla completa con los datos asociaodos de producción, municipios, departamentos y temperatura según el periodo de estudio y sobre la cual podrían empezarse todo tipo de análisis.
-
-\subsection{Metadatos}
-
-\subsection{Plan de Preservación}
-
-\subsection{Análisis de los Datos}
+Para unir ambas tablas, se creó un índice en cada una como la concatenación del código del municipio con el periodo al que corresponde los datos de producción o de temperatura superficial en el caso contrario. Dicho código fue utilizado como indicador del ``Join''  entre ambas tablas para obtener una tabla completa con los datos asociaodos de producción, municipios, departamentos y temperatura según el periodo de estudio y sobre la cual podrían empezarse todo tipo de análisis.
 
 
 
+\section{Plan de preservación}
+
+\section{Análisis de los datos}
 
 
 
+\section{Conclusiones}
+
+\newpage
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Cadena productiva del maíz: área de producción y rendimiento. Gobierno de Colombia. 2018. https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5
+
+\bibitem{ref2} Terra Land Surface Temperature and Emissivity Daily Global 1km. NASA LP DAAC at the USGS EROS Center. https://developers.google.com/earth-engine/datasets/catalog/MODIS\_006\_MOD11A1
+
+\bibitem{ref3} Nivel de referencia de veredas. Departamento Administrativo Nacional de Estadística (DANE). 2015. https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/descarga-nivel-de-referencia-de-veredas/
+
+\bibitem{ref4} Colombia. In \textit{Calendario de cultivos América Latina y el Caribe}, volume 186, pages 79-92. FAO, Roma. 2006.
+
+\bibitem{ref5} Fisiología de la planta del maíz, pages 33-59. In \textit{Aspectos técnicos de la producción de maíz en Colombia}. Ospina Rojas, J. G. and Duarte Pérez, C.J. 2001. http://www.fao.org/docrep/003/x7650s/x7650s00.htm
+
+\bibitem{ref6} Data management - H2020 Online manual. European Comission. https://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/data-management\_en.htm
+
+\bibitem{ref10} Fisiología del maíz tropical. In \textit{El maíz en los trópicos: mejoramiento y producción}. Lafitte, H. R. 2001.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{thebibliography}
 
 \bibliography{referencias_informe.bib}
 \bibliographystyle{apalike}
