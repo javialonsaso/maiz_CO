@@ -41,7 +41,8 @@
 \section{Punto de partida del proyecto}
 
 Nuestros datasets:
-1. producción(formato csv) ;
+
+1. producción(formato csv)
 https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5
 2. imágenes de temperatura (formato tiff, imagen georeferenciada);
 https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MOD11A1
@@ -63,6 +64,7 @@ Conforme aumente la temperatura se espera una producción mayor , con una temper
 \subsection{Requisitos}
 
 Requisitos: aquí hablamos sobre los datos que tenemos (es nuestro punto de partida, de arriba, lo que hemos puesto de los formatos y a qué queremos llegar a partir de ellos).
+
 1. producción: cadena productiva de maíz. En este csv podemos encontrar el rendimiento de la producción de Zea mays (maíz) en unidades de toneladas/hectárea por cada municipio de Colombia. Los datos se dividen por semestres.
 2. imágenes de temperatura: temperatura por vereda (más pequeño que un municipio, un municipio se divide en veredas) para cada día. Para cada día tenemos una temperatura máxima y otra mínima. (importante: la necesitamos semestralmente porque los datos de la cosecha están por semestres, para ello hacemos una media de cada día, y después con las medias de todos los días, hacemos la media de cada semestre, obteniendo así 2 temperaturas por año)
 3. polígonos de veredas que contienen municipios: tenemos las temperaturas por vereda, y la producción por municipio. Entonces debemos agrupar las temperaturas de las veredas a cada respectivo municipio para ya tener las temperaturas semestrales por municipio.
@@ -135,7 +137,7 @@ los formatos en los que se han recogido los datos han sido los siguientes:
 
 - ...
 
-\subsubsection{Data Management plan}
+\subsection{Data Management plan}
 
 1. Data summary
 
@@ -178,6 +180,31 @@ Los datos pueden ser encontrados en el repositorio de github(), junto con este i
 mirar metadados sil
 
 - ¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
+
+\subsection{Curación de Datos y ETL}
+
+Las tres fuentes de datos tuvieron que pasar por un proceso de curación y posteriormente por un proceso ETL para obtener una base de datos limpia y lista para realizar cualquier tipo de análisis sobre ella.
+
+\subsubsection{Preprocesamiento de imágenes}
+
+Las imágenes georreferenciadas de temperatura superficial, obtenidas a partir del producto MOD11A1, del sensor MODIS abordo del satélite de la NASA Terra EOS AM-1, fueron las primeras en preprocesarse, ya que era necesario adecuar la temporalidad de estos datos (diaria) a la temporalidad de los datos de producción (semestral).
+
+Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, conocidas como bandas, de las cuales se utilizaron dos:
+
+1. LST_Day_1km
+2. LST_Night_1km
+
+Estas bandas contienen la información de la temperatura diaria de la superficie terrestre de día y de noche repartidas en una grilla de 1 km. Ambas bandas fueron utilizadas como temperatura superficial mínima y temperatura superficial máxima y con ellas calcular la temperatura superficial media por cada valor de pixel de la grilla.
+
+Teniendo una imagen de temperatura superficial por día, se calculó el promedio por cada pixel de la grilla se manera semestral desde el año 2015 hasta el primer semestre del año 2018 (fecha hasta la cual se encuentran disponibles los datos de producción de maíz). Por tal motivo se redujo la cantidad de imágenes diarias a 7 imágenes correspondientes a la temperatura superficial media semestral de los años correspondientes para la cobertura espacial de Colombia.
+
+\subsubsection{Preprocesamiento de veredas}
+
+\subsection{Metadatos}
+
+\subsection{Plan de Preservación}
+
+\subsection{Análisis de los Datos}
 
 
 
