@@ -279,16 +279,20 @@ Las palabras claves proporcionadas son las siguientes: maíz, producción, rendi
 
 \begin{shaded}
 ¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
+%¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
 \end{shaded}
 Se han incluido los siguientes metadatos: título, creador, palabras clave, descripción, editor, contribuidor, fecha, tipo, formato, identificador, fuente, idioma, cobertura y derechos.
-
+% Podemos linkear los datos con zenodo
 
 \textbf{Hacer los datos accesibles}
+Los data sets estarán disponibles libremente a la comunidad a través de la plataforma de GitHub. En su caso para los data sets originales, se podrán encontrar referenciados en este informe.
 
 \begin{shaded}
 ¿Qué datos producidos y/o utilizados en el proyecto se presentarán abiertamente? Si algunos datasets no pueden ser compartidos (o tienen que serlo bajo ciertas restricciones) explica por qué, separando claramente si el motivo es legal o voluntario. 
 \end{shaded}
-Se harán públicos los datos producidos y de los tres datasets utilizados, tan solo se harán públicos los correspondientes a las imágenes georreferenciadas y a los polígonos de veredas de Colombia, pero no el dataset de la producción de maíz debido a que recientemente el gobierno Colombiano denegó el acceso al público y ahora es un dataset privado. Por tanto, para respetar la medida del gobierno Colombiano, el dataset no se hará público.\\
+Los data sets usados, i.e. imágenes georreferenciadas de temperatura, polígonos de veredas en Colombia y la producción y rendimiento de maíz en el país son públicos y de libre acceso. En el repositorio se publican el data set original de la producción y rendimiento de maíz, además de los datos transformados de la temperatura en los distintos municipios del país y data set final que agrupa a todos los datos (todos los data sets usados son referenciados a sus repositorios).\\
+
+%Se harán públicos los datos producidos y de los tres datasets utilizados, tan solo se harán públicos los correspondientes a las imágenes georreferenciadas y a los polígonos de veredas de Colombia, pero no el dataset de la producción de maíz debido a que recientemente el gobierno Colombiano denegó el acceso al público y ahora es un dataset privado. Por tanto, para respetar la medida del gobierno Colombiano, el dataset no se hará público.\\
 
 \begin{shaded}
 ¿Cómo se harán accesible los datos?
@@ -383,6 +387,15 @@ Para unir ambas tablas, se creó un índice en cada una como la concatenación d
 
 
 \section{Plan de preservación}
+Los archivos de datos serán almacenados en 3 repositorios distintos. Cada repositorio representará un nivel distinto de accesibilidad y rapidez de lectura y sobrescritura. Se creará un plan para almacenar los datos durante los próximos 20 años. En este periodo de tiempo los datos están sujetos a cambios según la calidad de ellos pueda mejorar.
+
+El primer repositorio será de acceso público y en la nube para que cualquier usuario de la comunidad pueda acceder a los datos \textit{on the go}. Usaremos la plataforma de github para almacenar los datos. De esta forma, la comunidad puede participar libremente en la conservación, calidad y contraste de los datos con otras fuentes. Los datos se actualizarán como mínimo cada 6 meses.
+
+En el segundo nivel utilizaremos discos duros para almacenar los datos y los resultados. Utilizaremos la interfaz SATA puesto que es el más rentable cuanto a espacio. Se montarán sobre una arquitectura RAID 6. De esta forma podemos garantizar la protección de los datos por imperfecciones en los discos utilizando paridad por bloques de memoria en el disco.
+
+Este repositorio será de acceso exclusivo para los colaboradores del proyecto y será revisado de forma periódica anualmente en función de los cambios realizados sobre el primero subido a la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
+
+El último nivel se usarán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros).
 
 \section{Análisis de los datos}
 
