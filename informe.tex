@@ -1,6 +1,6 @@
 \documentclass[12pt, spanish]{article}
 \usepackage[left = 2.5cm, right = 2.5cm, bottom = 2.5cm, top = 2.5cm]{geometry}
-\usepackage[spanish]{babel}
+\usepackage[spanish,es-tabla]{babel}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, linkcolor=blue]{hyperref}
 \usepackage[utf8]{inputenc}
@@ -20,6 +20,18 @@
 \usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{framed, color}
+
+\usepackage[natbibapa]{apacite}
+\usepackage[hyphens]{url}
+%\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor = blue,
+}
+
 \textheight=21cm
 \textwidth=17cm
 \topmargin=-1cm
@@ -50,10 +62,9 @@
 	 \end{align*}
 	\end{flushright}
 \end{titlepage}
-
 %comandos para poner la bibliografía con estilo de cita harvard
 \renewcommand{\refname}{Referencias} %para que ponga referencias en el apartado de referencias y no el término en inglés
-\renewcommand{\citeform[1]}{\textcolor{blue}{#1}}% las citas en el texto salen de color azul
+%\renewcommand{\citeform[1]}{\textcolor{blue}{#1}}% las citas en el texto salen de color azul
 
 %líneas exclusivas de la implementación del estilo harvard
 %usepackage[sort&compress]{natbib}
@@ -66,12 +77,9 @@
 
 \setlength{\parskip}{1em} %con esta línea dejamos una línea en blanco entre párrafos
 
-
-
-
-
 \pagenumbering{roman}
 \tableofcontents 
+\listoftables
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -81,11 +89,11 @@
 En el siguiente trabajo, presentaremos resultados obtenidos y analizados a partir de tres fuentes de datos en abierto. Estas fuentes serán los siguientes datasets:
 
 \begin{itemize}
-    \item Producción del maíz en Colombia \cite{ref1}
+    \item Producción del maíz en Colombia (\cite{GobiernodeColombia2018}).
     
-    \item Imágenes de temperatura a escala global \cite{ref2} 
+    \item Imágenes de temperatura a escala global (\cite{NASALPDAACattheUSGSEROSCenter2019})
     
-    \item Polígonos de veredas de Colombia, donde un conjunto de veredas define un municipio \cite{ref3}
+    \item Polígonos de veredas de Colombia, donde un conjunto de veredas define un municipio (\cite{DANECOL2017})
 \end{itemize}
 
 
@@ -122,24 +130,32 @@ Para poder generar las fuentes de datos necesarias para el proyecto es necesario
     \item Contratación de personal cualificado para el cultivo (agricultores).
     \item Calendario de siembra para el cultivo adaptado a cada región de Colombia.
     
-Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) \cite{ref4}, esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
+Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) (\cite{FAO2006a}), esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
 
 Planteándose el siguiente calendario para la siembra:
+\newpage
 
-\begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}|  }
-\hline
-\multicolumn{3}{|c|}{Calendario de siembra de \textit{Zea mays} en Colombia} \\
-\hline
-Región & Período de siembra & Referencia  \\
-\hline
-ZAE1 & Abril; septiembre &  \\
-ZAE2 & Marzo  &  \\
-ZAE3 & Marzo; septiembre & modificado de \cite{ref4} \\
-ZAE4; ZAE5; ZAE6 & Febrero; septiembre &  \\
-\hline
-\end{tabular}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}|  }
+        \hline
+        %\multicolumn{3}{|c|}{Calendario de siembra de \textit{Zea mays} en Colombia} \\
+        %\hline
+        Región & Período de siembra & Referencia  \\
+        \hline
+        ZAE1 & Abril; septiembre &  \\
+        ZAE2 & Marzo  &  \\
+        ZAE3 & Marzo; septiembre & modificado de (\cite{FAO2006a})  \\
+        ZAE4; ZAE5; ZAE6 & Febrero; septiembre &  \\
+        \hline
+    \end{tabular}
+    \caption{Calendario de siembra de \textit{Zea mays} en Colombia}
+    \label{tab:1}
+\end{table}
 
-Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días \cite{ref5}.
+
+
+Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días (\cite{Fisiomaizfenalce2011}).
 
 \item Análisis químico del suelo en cada una de las zonas geográficas con el objetivo de determinar las necesidades nutricionales del mismo y por tanto los complementos necesarios para el desarrollo del cultivo del maíz. Estos complementos se tendrán en cuenta en la elección del abono apropiado para el campo de cultivo.
 
@@ -155,12 +171,12 @@ Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 m
 
 \subsubsection{Interés}
 
-El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio \cite{ref5}. 
+El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio (\cite{Fisiomaizfenalce2011}). 
 Es por esto que consideramos de interés la optimización de su producción, concretamente queremos centrarnos en los pequeños agricultores, pretendemos proporcionarles un método para empezando desde cero con el cultivo asegurar que las condiciones de este son óptimas. Así con una producción inicial estable sería posible ampliar la producción, y podrían hacerlo aplicando de nuevo el método usado.
 
 Por tanto, el problema a enfocar en este proyecto es encontrar el municipio de Colombia óptimo para la producción de \textit{Zea Mays}, además de la temperatura asociada para dicha producción óptima. En definitiva, optimizar la producción de maíz en Colombia eligiendo la mejor región de producción en base a la variable temperatura.
 
-La razón de la elección de la temperatura como variable principal en el análisis se basa en que es esencial para el desarrollo del maíz \cite{ref10}
+La razón de la elección de la temperatura como variable principal en el análisis se basa en que es esencial para el desarrollo del maíz (\cite{Lafitte2001}).
 
 
 \subsubsection{Cobertura (geográfica, temporal)}
@@ -179,11 +195,11 @@ Parafrasear los objetivos del principio.
 
 Los datos han sido extraídos de las siguientes bases de datos en abierto: 
 
-- Base de datos en abierto del gobierno de Colombia \cite{ref1}. Concretamente los datos de producción han sido oobtenidos de la división de agricultura y desarrollo rural.
+- Base de datos en abierto del gobierno de Colombia (\cite{GobiernodeColombia2018}). Concretamente los datos de producción han sido oobtenidos de la división de agricultura y desarrollo rural.
 
-- The Land Processes Distributed Active Center (LP DACC), que es una base de datos en abierto englobada dentro del sistema de observación de la NASA (NASA Earth Observing System Data and Information System, EOSDIS) en la división USGS Earth Resources Observation and Science (EROS) \cite{ref2}.
+- The Land Processes Distributed Active Center (LP DACC), que es una base de datos en abierto englobada dentro del sistema de observación de la NASA (NASA Earth Observing System Data and Information System, EOSDIS) en la división USGS Earth Resources Observation and Science (EROS) (\cite{NASALPDAACattheUSGSEROSCenter2019}).
 
-- Geoportal del Departamento Aministrativo Nacional de Estadística de Colombia (DANE), en particular tomamos los datos de polígnos de veredas que dividen por regiones a Colombia\cite{ref3}.
+- Geoportal del Departamento Aministrativo Nacional de Estadística de Colombia (DANE), en particular tomamos los datos de polígnos de veredas que dividen por regiones a Colombia(\cite{DANECOL2017}).
 
 Los formatos en los que se han recogido los datos han sido los siguientes:
 \begin{itemize}
@@ -196,7 +212,7 @@ Los formatos en los que se han recogido los datos han sido los siguientes:
 
 A continuación, describimos el plan de gestión de los datos, en el que explicaremos cómo se han creado los datos, se detallará cómo se documentarán, quién podrá obtenerlos y cómo. Se especificará cómo serán almacenados y si serán comparados. 
 
-Para ello, seguiremos el plan desarrollado en la convocatoria del H2020 \cite{ref6}. Siguiendo el template desarrollado en la convocatoria del documento del H2020 crearemos unos datos FAIR : Findable, Accessible, Interoperable, Re-usable. Por tanto, los datos creados podrán ser identificados con metadatos accesibles y legibles tanto por máquinas como por personas, gracias al uso de protocolos estándarizados. Y finalmente, estarán bien descritos mediante unos metadatos bien explicados. 
+Para ello, seguiremos el plan desarrollado en la convocatoria del H2020 (\cite{horizon2020dmp2019}). Siguiendo el template desarrollado en la convocatoria del documento del H2020 crearemos unos datos FAIR : Findable, Accessible, Interoperable, Re-usable. Por tanto, los datos creados podrán ser identificados con metadatos accesibles y legibles tanto por máquinas como por personas, gracias al uso de protocolos estándarizados. Y finalmente, estarán bien descritos mediante unos metadatos bien explicados. 
 
 \subsection{Data summary}
 
@@ -279,19 +295,21 @@ Las palabras claves proporcionadas son las siguientes: maíz, producción, rendi
 
 \begin{shaded}
 ¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
-%¿Qué metadados se han creado? En caso de que no haya metadatos estándar en la disciplina, indicar el tipo de metadado y cómo se ha creado.
 \end{shaded}
 Se han incluido los siguientes metadatos: título, creador, palabras clave, descripción, editor, contribuidor, fecha, tipo, formato, identificador, fuente, idioma, cobertura y derechos.
-% Podemos linkear los datos con zenodo
+
+
+
 
 \textbf{Hacer los datos accesibles}
+%podemos linkear los datos con zenodo
+
 Los data sets estarán disponibles libremente a la comunidad a través de la plataforma de GitHub. En su caso para los data sets originales, se podrán encontrar referenciados en este informe.
 
 \begin{shaded}
 ¿Qué datos producidos y/o utilizados en el proyecto se presentarán abiertamente? Si algunos datasets no pueden ser compartidos (o tienen que serlo bajo ciertas restricciones) explica por qué, separando claramente si el motivo es legal o voluntario. 
 \end{shaded}
 Los data sets usados, i.e. imágenes georreferenciadas de temperatura, polígonos de veredas en Colombia y la producción y rendimiento de maíz en el país son públicos y de libre acceso. En el repositorio se publican el data set original de la producción y rendimiento de maíz, además de los datos transformados de la temperatura en los distintos municipios del país y data set final que agrupa a todos los datos (todos los data sets usados son referenciados a sus repositorios).\\
-
 %Se harán públicos los datos producidos y de los tres datasets utilizados, tan solo se harán públicos los correspondientes a las imágenes georreferenciadas y a los polígonos de veredas de Colombia, pero no el dataset de la producción de maíz debido a que recientemente el gobierno Colombiano denegó el acceso al público y ahora es un dataset privado. Por tanto, para respetar la medida del gobierno Colombiano, el dataset no se hará público.\\
 
 \begin{shaded}
@@ -321,7 +339,7 @@ Para describir los datos/metadatos del documento final, se han seguido los conve
 \begin{shaded}
 ¿Qué licencia tendrán los datos para permitir la reutilización más amplia posible?
 \end{shaded}
-Nos apoyaremos en Atribución/Reconocimiento 4.0 Licencia Pública Internacional. Por lo tanto, el usuario es libre tanto de compartir, copiar, redistribuir el material tanto como de adaptar, trasnformar y crear a partir de dicho material.[https://creativecommons.org/licenses/by/4.0/deed.es_ES]\\
+Nos apoyaremos en Atribución/Reconocimiento 4.0 Licencia Pública Internacional. Por lo tanto, el usuario es libre tanto de compartir, copiar, redistribuir el material tanto como de adaptar, trasnformar y crear a partir de dicho material (\cite{CreativeCommonsCorporation2020}).\\
 
 
 \begin{shaded}
@@ -396,7 +414,6 @@ En el segundo nivel utilizaremos discos duros para almacenar los datos y los res
 Este repositorio será de acceso exclusivo para los colaboradores del proyecto y será revisado de forma periódica anualmente en función de los cambios realizados sobre el primero subido a la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
 
 El último nivel se usarán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros).
-
 \section{Análisis de los datos}
 
 
@@ -405,25 +422,14 @@ El último nivel se usarán cintas magnéticas para el almacenaje. Es el método
 
 \newpage
 
-\begin{thebibliography}{99}
-\bibitem{ref1} Cadena productiva del maíz: área de producción y rendimiento. Gobierno de Colombia. 2018. https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5
 
-\bibitem{ref2} Terra Land Surface Temperature and Emissivity Daily Global 1km. NASA LP DAAC at the USGS EROS Center. https://developers.google.com/earth-engine/datasets/catalog/MODIS\_006\_MOD11A1
+\bibliographystyle{apacite}
 
-\bibitem{ref3} Nivel de referencia de veredas. Departamento Administrativo Nacional de Estadística (DANE). 2015. https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/descarga-nivel-de-referencia-de-veredas/
-
-\bibitem{ref4} Colombia. In \textit{Calendario de cultivos América Latina y el Caribe}, volume 186, pages 79-92. FAO, Roma. 2006.
-
-\bibitem{ref5} Fisiología de la planta del maíz, pages 33-59. In \textit{Aspectos técnicos de la producción de maíz en Colombia}. Ospina Rojas, J. G. and Duarte Pérez, C.J. 2001. http://www.fao.org/docrep/003/x7650s/x7650s00.htm
-
-\bibitem{ref6} Data management - H2020 Online manual. European Comission. https://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/data-management\_en.htm
-
-\bibitem{ref10} Fisiología del maíz tropical. In \textit{El maíz en los trópicos: mejoramiento y producción}. Lafitte, H. R. 2001.
+\begingroup
+    \setlength{\bipsep}
+    
+    \bibliography{referencias_informe.bib}
+\endgroup
 
 
-
-\end{thebibliography}
-
-\bibliography{referencias_informe.bib}
-\bibliographystyle{apalike}
 \end{document}
