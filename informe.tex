@@ -20,9 +20,10 @@
 \usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{framed, color}
+\usepackage[T1]{fontenc}
 
 \usepackage[natbibapa]{apacite}
-\usepackage[hyphens]{url}
+%\usepackage[hyphens]{url}
 %\usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -40,9 +41,10 @@
 \pagestyle{plain}
 
 \begin{document}
+\pagenumbering{Alph}
 \begin{titlepage}
 	\centering
-	\includegraphics[width=1\textwidth]{header.jpg}\par\vspace{1cm}
+%	\includegraphics[width=1\textwidth]{header.jpg}\par\vspace{1cm}
 	\vspace{1cm}
 	{\LARGE\bfseries \textsc{Proyecto de Ciclo de Vida de los Datos}\par}
 	
@@ -76,10 +78,10 @@
 \pagestyle{headings}%este estilo de página permite imprimir el nombre del capítulo o sección que se está procesando en la cabecera junto con el número de página en el lado opuesto, permaneciendo el pie de página vacio.
 
 \setlength{\parskip}{1em} %con esta línea dejamos una línea en blanco entre párrafos
-
 \pagenumbering{roman}
 \tableofcontents 
 \listoftables
+
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -130,7 +132,7 @@ Para poder generar las fuentes de datos necesarias para el proyecto es necesario
     \item Contratación de personal cualificado para el cultivo (agricultores).
     \item Calendario de siembra para el cultivo adaptado a cada región de Colombia.
     
-Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) (\cite{FAO2006a}), esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
+Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) (\cite{GarciaA2014}), esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
 
 Planteándose el siguiente calendario para la siembra:
 \newpage
@@ -145,7 +147,7 @@ Planteándose el siguiente calendario para la siembra:
         \hline
         ZAE1 & Abril; septiembre &  \\
         ZAE2 & Marzo  &  \\
-        ZAE3 & Marzo; septiembre & modificado de (\cite{FAO2006a})  \\
+        ZAE3 & Marzo; septiembre & modificado de (\cite{GarciaA2014})  \\
         ZAE4; ZAE5; ZAE6 & Febrero; septiembre &  \\
         \hline
     \end{tabular}
@@ -155,7 +157,7 @@ Planteándose el siguiente calendario para la siembra:
 
 
 
-Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días (\cite{Fisiomaizfenalce2011}).
+Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días (\cite{Lafitte2001}).
 
 \item Análisis químico del suelo en cada una de las zonas geográficas con el objetivo de determinar las necesidades nutricionales del mismo y por tanto los complementos necesarios para el desarrollo del cultivo del maíz. Estos complementos se tendrán en cuenta en la elección del abono apropiado para el campo de cultivo.
 
@@ -171,7 +173,7 @@ Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 m
 
 \subsubsection{Interés}
 
-El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio (\cite{Fisiomaizfenalce2011}). 
+El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio (\cite{Lafitte2001}). 
 Es por esto que consideramos de interés la optimización de su producción, concretamente queremos centrarnos en los pequeños agricultores, pretendemos proporcionarles un método para empezando desde cero con el cultivo asegurar que las condiciones de este son óptimas. Así con una producción inicial estable sería posible ampliar la producción, y podrían hacerlo aplicando de nuevo el método usado.
 
 Por tanto, el problema a enfocar en este proyecto es encontrar el municipio de Colombia óptimo para la producción de \textit{Zea Mays}, además de la temperatura asociada para dicha producción óptima. En definitiva, optimizar la producción de maíz en Colombia eligiendo la mejor región de producción en base a la variable temperatura.
@@ -425,13 +427,10 @@ El último nivel se usarán cintas magnéticas para el almacenaje. Es el método
 \newpage
 
 
-\bibliographystyle{apacite}
-
 \begingroup
-    \setlength{\bipsep}
-    
-    \bibliography{referencias_informe.bib}
+	\setlength{\bibsep}{20.0pt}
+    \bibliographystyle{apache}
+    \bibliography{referenciasInforme}
 \endgroup
-
 
 \end{document}
