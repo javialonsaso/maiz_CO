@@ -361,7 +361,34 @@ Debido a que los datos se encuentrán disponibles en GitHub, deberían estar per
 \end{shaded}
 La calidad de los datos está fuertemente arraigada a la calidad de las fuentes originales. Como tratamos con datos gubernamentales por un lado y datos de satélite de la compañía Google por otro, podemos asegurarnos que los datos son de muy buena calidad y fiables.
 
-%JAVI ?????
+Por otra parte, los datos se encuentran disponibles y de libre acceso. La comunidad interersada puede participar y ayudar para la curación y calidad de los datos a largo periodo.
+
+
+
+\subsection{Localización de los recursos}
+
+\begin{shaded}
+¿Cúal es el coste de hacer los datos FAIR?
+\end{shaded}
+Como los datos se encuentran en un repositorio abierto. El acceso es fácil y gratuito. Además, se encuentran en formato \textit{csv}, muchos lenguajes y entornos de programación están preparados para tratar con este formato. Además, los datos estarán disponibles en la base de Zenodo que lleva preparado APIs para conseguir el recurso.
+
+\subsection{Seguridad de los datos}
+\begin{shaded}
+¿Qué medidas preventivas se encuentran impuestas a los datos?
+\end{shaded}
+Los datos en la nube sólo podrán ser sobreescritos por los contribuidores de este proyecto. De todas formas, se levanta una arquitectura de hardware con discos duros que realizan back ups de forma periódica sobre el repositorio además del uso de cintas magnéticas para el repositorio completo en caso de que los recursos se pierdan en la nube.
+
+Tanto los discos como las cintas se encuentran a disposición de los contribuidores del proyecto exclusivamente, para evitar ataques externos.
+
+
+\begin{shaded}
+¿Los datos se encuentran almacendos un repositorio certificado para la preservación y curación a largo plazo?
+\end{shaded}
+Los datos estarán disponibles en la plataforma de Zenodo. Esta será la localización recomendada para obtenerlos. Sin embargo, como también publicamos los scipts que permiten llegar a crear el recurso, una versión más volátil se puede encontrar en el repositorio de Gitub.
+
+\subsection{Aspectos éticos}
+
+No existen conflictos de interés en este proyecto.
 
 
 
@@ -411,7 +438,6 @@ Los municipios se encuentran identificados por un código en la base de datos de
 Para unir ambas tablas, se creó un índice en cada una como la concatenación del código del municipio con el periodo al que corresponde los datos de producción o de temperatura superficial en el caso contrario. Dicho código fue utilizado como indicador del ``Join''  entre ambas tablas para obtener una tabla completa con los datos asociaodos de producción, municipios, departamentos y temperatura según el periodo de estudio y sobre la cual podrían empezarse todo tipo de análisis.
 
 
-
 \section{Plan de preservación}
 Los archivos de datos serán almacenados en 3 dispositivos de memoria distintos. Cada dispositivo representará un nivel distinto de accesibilidad y rapidez de lectura y sobrescritura. Se creará un plan para almacenar los datos durante los próximos 20 años. En este periodo de tiempo los datos están sujetos a cambios según surjan mejoras en su calidad.
 
@@ -429,18 +455,10 @@ El último nivel serán cintas magnéticas para el almacenaje. Es el método de 
 \section{Análisis de los datos}
 
 
-A partir de los archivos sobre la producción de maíz (\textit{Cadena\_Productiva\_Maiz\_-\_Area\_\_Produccion\_Y\_Rendimiento.csv}
-y de la temperatura media asociada a cada región del país
-(\textit{tmean\_gathered.csv})
-comenzamos por cargar los datos dentro de un entorno Python utilizando las librerías de \texttt{Pandas} \texttt{Numpy}. De esta forma, podemos agrupar, manipular y guardar fácilmente los datos generados.
-
-Agrupamos por departamentos. De esta forma esperamos eliminar la variabilidad del problema proveniente de factores que no se están teniendo en cuenta, como la calidad de la tierra, fertilizantes, detalles del cuidado del cultivo, etc.
-
-Luego crearemos un nuevo data set que relacione la temperatura y los datos del cultivo según el departamento (utilizando su identificador numérico) y el periodo de cosecha. Estos serán los datos producidos en este proyecto y tuilizaremos para obtener los resultados finales.
 
 
-PONER EN TITULO
-Relación entre la producción y el área cosechada
+
+\subsubsection{Relación entre la producción y el área cosechada}
 
 Comenzamos por comparar la producción que se obtiene de una cosecha según el área cosechada. Esto sirve para observar si existe una regla de proporcionalidad entre las dos variables o existe otra tendencia producida por otros factores (i.e. que una cosecha muy pequeña haya sido cosechada por agricultores locales y no invierten tanto como compañías agrícolas y por eso, el cociente producción, área cosechada es menor).
 
@@ -451,6 +469,8 @@ Comenzamos por comparar la producción que se obtiene de una cosecha según el �
 \end{figure}
 
 Podemos observar en la figura (\ref{fig:cosecha}) que existe una relacion de proporcionalidad directa entre la producción en toneladas y el área cosechada. No observamos ninguna tendencia que se desvíe de la proporcionalidad.
+
+\subsubsection{Estudio del rendimiento de las cosechas en función de la temperatura}
 
 
 Por otro lado, comparamos le rendimiento, esto es, la masa de maíz generado por unidad de área de maíz cosechado. Esperamos que dependiendo de la temperatura, el rendimiento sea variado y que exista una temperatura que produzca la mayor cantidad de rendimiento de la cosecha.
@@ -463,14 +483,24 @@ Un vistazo previo a los datos nos revela que la cantidad de ruido es muy elevado
 	\label{fig:rendimiento}
 \end{figure}
 
-Observamos que se produce un pico de rendimiento y ajustamos a una forma gaussiana. Aunque no es un ajuste muy adecuado (no aparecen datos alrededor de los $12\degree$C) encontramos que la temperatura óptima es de $20\degree$C. Es un valor esperado bajo, puesto que la temperatura óptima para el cultivo de maíz es de alrededor $25\degree$C. Esto puede deberse a otros factores que no se han tenido en cuenta, como la precipitación, la presión atmosférica, la temperatura de la tierra (nuestra variable independiente esla temperatura del aire en la superficie) entre otras.
+Observamos que se produce un pico de rendimiento y ajustamos a una forma gaussiana. Aunque no es un ajuste muy adecuado (no aparecen datos alrededor de los $12\degree$C) encontramos que la temperatura óptima es de $20\degree$C. 
+El rendimiento potencial de nuestro modelo hayado es de $131$ toneladas por hectárea.
 
 
 
 \section{Conclusiones}
 
-\newpage
+Los datos de Colombia sugieren una temperatura óptima inferior a la sugerida en la literatura \cite{Fisiomaizfenalce2011}.
+Esto puede deberse a otros factores que no se han tenido en cuenta, como la precipitación, la presión atmosférica, la temperatura de la tierra (nuestra variable independiente esla temperatura del aire en la superficie) entre otras.
 
+Por otro lado, se ha comprobado la linealidad de la relación entre la producción y el área de cosecha. Con lo que podemos excluir como factor determinante la calidad del suelo en las diferentes regiones colombianas, no habiendo diferencias significativas en el rendimiento de la cosecha.
+
+La arquitectura levantada para el mantenimiento y disposición de los datos juega un papel fundamental en el ámbito de los datos en abierto en la comunidad científica. Permite ayudar a futuros proyectos y colaboraciones para conseguir resultados de interés común.
+
+
+
+\newpage
+ANA PASALO A OVERLEAF Y SACA PDF
 
 \begingroup
 	\setlength{\bibsep}{20.0pt}
