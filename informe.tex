@@ -21,6 +21,7 @@
 \usepackage{parskip}
 \usepackage{framed, color}
 \usepackage[T1]{fontenc}
+\usepackage{gensymb}
 
 \usepackage[natbibapa]{apacite}
 %\usepackage[hyphens]{url}
@@ -359,7 +360,8 @@ Debido a que los datos se encuentrán disponibles en GitHub, deberían estar per
 ¿Se describen los procesos de garantía de calidad de los datos?
 \end{shaded}
 La calidad de los datos está fuertemente arraigada a la calidad de las fuentes originales. Como tratamos con datos gubernamentales por un lado y datos de satélite de la compañía Google por otro, podemos asegurarnos que los datos son de muy buena calidad y fiables.
-JAVI ?????
+
+%JAVI ?????
 
 
 
@@ -373,8 +375,10 @@ Las imágenes georreferenciadas de temperatura superficial, obtenidas a partir d
 
 Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, conocidas como bandas, de las cuales se utilizaron dos:
 
-1. LST\_Day\_1km \\
-2. LST\_Night\_1km
+\begin{enumerate}
+	\item LST\_Day\_1km
+	\item LST\_Night\_1km
+\end{enumerate}
 
 Estas bandas contienen la información de la temperatura diaria de la superficie terrestre de día y de noche repartidas en una grilla de 1 km. Ambas bandas fueron utilizadas como temperatura superficial mínima y temperatura superficial máxima y con ellas calcular la temperatura superficial media por cada valor de pixel de la grilla. De manera adicional, la temperatura, que se encontraba en grados Kelvin, fue convertida a grados centigrados.
 
@@ -409,17 +413,32 @@ Para unir ambas tablas, se creó un índice en cada una como la concatenación d
 
 
 \section{Plan de preservación}
-Los archivos de datos serán almacenados en 3 repositorios distintos. Cada repositorio representará un nivel distinto de accesibilidad y rapidez de lectura y sobrescritura. Se creará un plan para almacenar los datos durante los próximos 20 años. En este periodo de tiempo los datos están sujetos a cambios según la calidad de ellos pueda mejorar.
+Los archivos de datos serán almacenados en 3 dispositivos de memoria distintos. Cada dispositivo representará un nivel distinto de accesibilidad y rapidez de lectura y sobrescritura. Se creará un plan para almacenar los datos durante los próximos 20 años. En este periodo de tiempo los datos están sujetos a cambios según surjan mejoras en su calidad.
 
-El primer repositorio será de acceso público y en la nube para que cualquier usuario de la comunidad pueda acceder a los datos \textit{on the go}. Usaremos la plataforma de github para almacenar los datos. De esta forma, la comunidad puede participar libremente en la conservación, calidad y contraste de los datos con otras fuentes. Los datos se actualizarán como mínimo cada 6 meses.
+El primer repositorio será de acceso público y disponible en la nube para que cualquier usuario de la comunidad pueda acceder a los datos \textit{on the go}. Usaremos la plataforma de GitHub para almacenar el repositorio. De esta forma, la comunidad puede participar libremente en la conservación, calidad y contraste de los datos con otras fuentes. Los datos se actualizarán frecuentemente (cada 6 meses) según se actualizen las bases de datos fuente y contribuciones por parte de la comunidad.
 
 En el segundo nivel utilizaremos discos duros para almacenar los datos y los resultados. Utilizaremos la interfaz SATA puesto que es el más rentable cuanto a espacio. Se montarán sobre una arquitectura RAID 6. De esta forma podemos garantizar la protección de los datos por imperfecciones en los discos utilizando paridad por bloques de memoria en el disco.
 
-Este repositorio será de acceso exclusivo para los colaboradores del proyecto y será revisado de forma periódica anualmente en función de los cambios realizados sobre el primero subido a la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
+Este dispositivo será de acceso exclusivo para los colaboradores del proyecto y recogerá los cambios realizados al repositorio en la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
 
-El último nivel se usarán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros).
+El último nivel serán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros). En esta cinta se almacenarán todos los datos de tal forma que si los datos de la nube se pierden, los backups realizados en el disco duro junto con la información en las cintas pueden recuperar el repositorio actualizado.
+
+% https://www.backupworks.com/LTO1-Ultrium-Tape-Media.aspx
+
+
 \section{Análisis de los datos}
 
+\begin{figure}[H]
+	\includegraphics[width=0.6\linewidth]{./figures/cosecha.png} % 10x10 t=3 dt=0.001 n=10
+	\caption{Distribución de los cultivos según el área cosechada en hectáreas y la producción toneladas. La figura se encuentra en escala logarítmica. Observamos un comportamiento lineal con una pendiente $1.10 \pm 0.11$ por lo que nos encontramos en el régimen lineal.}
+	\label{fig:cosecha}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=0.6\linewidth]{./figures/rendimiento.png} % 10x10 t=3 dt=0.001 n=10
+	\caption{Rendimiento de los cultivos en función de la temperatura en esa época. Los datos han sido agrupados para observar mejor la tendencia y encontrar un pico de rendimiento alrededor de los $20\degree$C. Las barras agrupan cosechas en intervalos de $2.5\degree$C y están centradas según sus temperaturas, su altura es el rendimiento medio del grupo.}
+	\label{fig:rendimiento}
+\end{figure}
 
 
 \section{Conclusiones}
