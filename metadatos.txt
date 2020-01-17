@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="/webservices/catalog/xsl/searchRetrieveResponse.xsl"?>
+
+<searchRetrieveResponse 
+	xmlns:oclcterms="http://purl.org/oclc/terms/" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" 
+	xmlns:diag="http://www.loc.gov/zing/srw/diagnostic/" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<dc:title>Datos curados de variables de producción por departamento colombiano (2015-2018)</dc:title>
+<dc:creator>Ana González Guerra</dc:creator>
+<dc:creator>David Montero Loaiza</dc:creator>
+<dc:creator>Silvia Magdalena López Monzó</dc:creator>
+<dc:creator>Javier Alonso del Saso</dc:creator>
+<dc:subject>
+maíz, producción, rendimiento, Colombia, departamento, temperatura, área cosechada, área sembrada
+</dc:subject>
+<dc:description>
+El siguiente dataset contiene información sobre el rendimiento (t/ha), producción (t), área cosechada (ha), área sembrada (ha) y temperatura (ºC) de cada departamento colombiano por semestre desde 2015 hasta el primer semestre de 2018.
+</dc:description>
+<dc:publisher>GitHub</dc:publisher>
+<dc:contributor URL1="https://www.datos.gov.co/" URL2="https://lpdacc.usgs.gov/" ULR3="https://geoportal.dane.gov.co/">Base de datos en abierto del gobierno de Colombia, Base de datos en abierto de The Land Processes Distributed Active CenterBase, Geoportal del Departamento Administrativo Nacional de Estadística de Colombia</dc:contributor>
+<dc:date>20/01/2020</dc:date>
+<dc:type>investigación, análisis de datos, transformación</dc:type>
+<dc:format>csv</dc:format>
+<dc:identifier URL=“https://github.com/javialonsaso/maiz_CO/tree/master” DOI=“10.5281/zenodo.3611494”> Identificador DOI y URL</dc:identifier>
+<dc:source URL="https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ma-z-Area-Producci-n-Y-Rendimien/d968-yfb5" DOI ="10.5067/MODIS/MOD11A1.006" gcoFileIndetifier="e3514642-3a36-4184-8527-8311cf9287cb">Cadena Productiva Maíz Area Producción y Rendimiento,Terra Land Surface Temperature and Emissivity Daily Global 1km, Nivel de referencia de veredas"</dc:source>
+<dc:language>Español</dc:language>
+<dc:relation></dc:relation>
+<dc:coverage>Santander, Cantabria, España-12/01/2020</dc:coverage>
+<dc:rights>Creative Commons - Reconocimiento 4.0 Internacional - CC BY 4.0</dc:rights>
+
+
+
+
+</searchRetrieveResponse>
