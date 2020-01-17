@@ -428,17 +428,43 @@ El último nivel serán cintas magnéticas para el almacenaje. Es el método de 
 
 \section{Análisis de los datos}
 
+
+A partir de los archivos sobre la producción de maíz (\textit{Cadena\_Productiva\_Maiz\_-\_Area\_\_Produccion\_Y\_Rendimiento.csv}
+y de la temperatura media asociada a cada región del país
+(\textit{tmean\_gathered.csv})
+comenzamos por cargar los datos dentro de un entorno Python utilizando las librerías de \texttt{Pandas} \texttt{Numpy}. De esta forma, podemos agrupar, manipular y guardar fácilmente los datos generados.
+
+Agrupamos por departamentos. De esta forma esperamos eliminar la variabilidad del problema proveniente de factores que no se están teniendo en cuenta, como la calidad de la tierra, fertilizantes, detalles del cuidado del cultivo, etc.
+
+Luego crearemos un nuevo data set que relacione la temperatura y los datos del cultivo según el departamento (utilizando su identificador numérico) y el periodo de cosecha. Estos serán los datos producidos en este proyecto y tuilizaremos para obtener los resultados finales.
+
+
+PONER EN TITULO
+Relación entre la producción y el área cosechada
+
+Comenzamos por comparar la producción que se obtiene de una cosecha según el área cosechada. Esto sirve para observar si existe una regla de proporcionalidad entre las dos variables o existe otra tendencia producida por otros factores (i.e. que una cosecha muy pequeña haya sido cosechada por agricultores locales y no invierten tanto como compañías agrícolas y por eso, el cociente producción, área cosechada es menor).
+
 \begin{figure}[H]
 	\includegraphics[width=0.6\linewidth]{./figures/cosecha.png} % 10x10 t=3 dt=0.001 n=10
 	\caption{Distribución de los cultivos según el área cosechada en hectáreas y la producción toneladas. La figura se encuentra en escala logarítmica. Observamos un comportamiento lineal con una pendiente $1.10 \pm 0.11$ por lo que nos encontramos en el régimen lineal.}
 	\label{fig:cosecha}
 \end{figure}
 
+Podemos observar en la figura (\ref{fig:cosecha}) que existe una relacion de proporcionalidad directa entre la producción en toneladas y el área cosechada. No observamos ninguna tendencia que se desvíe de la proporcionalidad.
+
+
+Por otro lado, comparamos le rendimiento, esto es, la masa de maíz generado por unidad de área de maíz cosechado. Esperamos que dependiendo de la temperatura, el rendimiento sea variado y que exista una temperatura que produzca la mayor cantidad de rendimiento de la cosecha.
+
+Un vistazo previo a los datos nos revela que la cantidad de ruido es muy elevado y debemos simplificar enormemente el problema. Decidimos coger intervalos de $2.5\degree$C y encontramos la media de temperatura y de rendimiento de ese grupo. Luego los representamos en una gráfica (figura (\ref{fig:rendimiento})).
+
 \begin{figure}[H]
 	\includegraphics[width=0.6\linewidth]{./figures/rendimiento.png} % 10x10 t=3 dt=0.001 n=10
 	\caption{Rendimiento de los cultivos en función de la temperatura en esa época. Los datos han sido agrupados para observar mejor la tendencia y encontrar un pico de rendimiento alrededor de los $20\degree$C. Las barras agrupan cosechas en intervalos de $2.5\degree$C y están centradas según sus temperaturas, su altura es el rendimiento medio del grupo.}
 	\label{fig:rendimiento}
 \end{figure}
+
+Observamos que se produce un pico de rendimiento y ajustamos a una forma gaussiana. Aunque no es un ajuste muy adecuado (no aparecen datos alrededor de los $12\degree$C) encontramos que la temperatura óptima es de $20\degree$C. Es un valor esperado bajo, puesto que la temperatura óptima para el cultivo de maíz es de alrededor $25\degree$C. Esto puede deberse a otros factores que no se han tenido en cuenta, como la precipitación, la presión atmosférica, la temperatura de la tierra (nuestra variable independiente esla temperatura del aire en la superficie) entre otras.
+
 
 
 \section{Conclusiones}
