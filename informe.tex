@@ -20,11 +20,12 @@
 \usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{framed, color}
-\usepackage[T1]{fontenc}
 \usepackage{gensymb}
 
 %\usepackage[natbibapa]{apacite}
 \usepackage{natbib}
+\bibliographystyle{unsrtnat}
+
 %\usepackage[hyphens]{url}
 %\usepackage{hyperref}
 \hypersetup{
@@ -41,10 +42,8 @@
 \oddsidemargin=0cm
 \parindent=0mm
 \pagestyle{plain}
-\bibliographystyle{unsrtnat}
 
 \begin{document}
-\pagenumbering{Alph}
 \begin{titlepage}
 	\centering
 	\includegraphics[width=1\textwidth]{header.jpg}\par\vspace{1cm}
@@ -84,7 +83,7 @@
 \pagenumbering{roman}
 \tableofcontents 
 \listoftables
-
+\listoffigures
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -108,21 +107,20 @@ En el siguiente trabajo, presentaremos resultados obtenidos y analizados a parti
 
 El objetivo principal del proyecto es obtener la dependencia de la producción de Zea mays (maíz) con la temperatura de las diferentes áreas de producción localizadas en municipios de Colombia. Para comparar dicha producción, usaremos el cociente de toneladas producidas por hectárea, que definiremos como rendimiento. También compararemos la proporción del terreno sembrado que genera producto que definiremos como eficiencia de la tierra.
 
-Todo ello para determinar la zona (o municipio) y temperatura de mayor producción de zea mays en Colombia.
 
 \subsection{Resultados esperados}
-Como primera aproximación, esperamos que a medida la temperatura aumente, también lo haga la producción, con una temperatura óptima asociada a una máxima producción de unos 25ºC. A temperaturas inferiores el rendimiento es menor llegando a una producción nula para temperaturas muy bajas.
+Como primera aproximación, esperamos que a medida la temperatura aumente, también lo haga la producción, con una temperatura óptima asociada a una máxima producción de unos 25ºC. A temperaturas inferiores se espera un rendimiento menor llegando a una producción nula para temperaturas muy bajas.
 
 \newpage
 
 \subsection{Requisitos}
 
-A continuación, desarrollaremos las funcionalidad de cada uno de los datasets introducidos anteriormente.
+A continuación, desarrollaremos las funcionalidades de cada uno de los datasets introducidos anteriormente.
 
 \begin{itemize}
     \item Dataset de la cadena productiva de maíz: en este csv podemos encontrar el rendimiento de la producción de Zea mays (maíz) en unidades de toneladas/hectárea por cada municipio de Colombia. Los datos se encuentran divididos por semestres, es decir, tenemos un dato por cada seis meses.
     
-    \item Imágenes de la temperatura: podemos observar la temperatura diara en cada vereda de Colombia, donde un conjunto de veredas constituye un municipio. Para cada día tenemos una temperatura máxima y una temperatura mínima. Es importante darse cuenta de que como los datos de rendimiento están por semestres, será necesario sacar una temperatura media semestral. Por tanto, haremos la media de la temperatura máxima y mínima para cada día, y después realizaremos otra media para obtener dos temperaturas semetrales al año.
+    \item Imágenes de la temperatura: podemos observar la temperatura diaria en cada vereda de Colombia, donde un conjunto de veredas constituye un municipio. Para cada día tenemos una temperatura máxima y una temperatura mínima. Es importante darse cuenta de que como los datos de rendimiento están por semestres, será necesario sacar una temperatura media semestral. Por tanto, haremos la media de la temperatura máxima y mínima para cada día, y después realizaremos otra media para obtener dos temperaturas semetrales al año.
     
     \item Dataset con los polígonos de veredas: el gobierno colombiano no dispone libremente los datos georreferenciados de municipios del país, no obstante, dispone los de veredas, que se encuentran administrativamente en un nivel inferior y por los cuales se pueden obtener los municipios y concordar así con los datos de producción de maíz, que se encuentran por municipios.
 \end{itemize}
@@ -135,7 +133,7 @@ Para poder generar las fuentes de datos necesarias para el proyecto es necesario
     \item Contratación de personal cualificado para el cultivo (agricultores).
     \item Calendario de siembra para el cultivo adaptado a cada región de Colombia.
     
-Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) (\cite{GarciaA2014}), esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
+Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) (\cite{FAO2006a}), esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
 
 Planteándose el siguiente calendario para la siembra:
 \newpage
@@ -150,7 +148,7 @@ Planteándose el siguiente calendario para la siembra:
         \hline
         ZAE1 & Abril; septiembre &  \\
         ZAE2 & Marzo  &  \\
-        ZAE3 & Marzo; septiembre & modificado de (\cite{GarciaA2014})  \\
+        ZAE3 & Marzo; septiembre & (modificado de \cite{FAO2006a})  \\
         ZAE4; ZAE5; ZAE6 & Febrero; septiembre &  \\
         \hline
     \end{tabular}
@@ -160,7 +158,7 @@ Planteándose el siguiente calendario para la siembra:
 
 
 
-Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días (\cite{Lafitte2001}).
+Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 meses dado que en general el ciclo de vida del maíz abarca entre 150 y 300 días (\cite{Fisiomaizfenalce2011}).
 
 \item Análisis químico del suelo en cada una de las zonas geográficas con el objetivo de determinar las necesidades nutricionales del mismo y por tanto los complementos necesarios para el desarrollo del cultivo del maíz. Estos complementos se tendrán en cuenta en la elección del abono apropiado para el campo de cultivo.
 
@@ -176,10 +174,10 @@ Se ha considerado un periodo estándar antes de la recogida de la cosecha de 5 m
 
 \subsubsection{Interés}
 
-El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio (\cite{Lafitte2001}). 
+El maíz constituye uno de los pilares más importantes en la producción agrícola de Colombia, encontrándose en prácticamente todo el territorio (\cite{Fisiomaizfenalce2011}).  
 Es por esto que consideramos de interés la optimización de su producción, concretamente queremos centrarnos en los pequeños agricultores, pretendemos proporcionarles un método para empezando desde cero con el cultivo asegurar que las condiciones de este son óptimas. Así con una producción inicial estable sería posible ampliar la producción, y podrían hacerlo aplicando de nuevo el método usado.
 
-Por tanto, el problema a enfocar en este proyecto es encontrar el municipio de Colombia óptimo para la producción de \textit{Zea Mays}, además de la temperatura asociada para dicha producción óptima. En definitiva, optimizar la producción de maíz en Colombia eligiendo la mejor región de producción en base a la variable temperatura.
+Por tanto, el problema a enfocar en este proyecto es encontrar la temperatura óptima para la producción de \textit{Zea Mays}, además de la temperatura asociada para dicha producción óptima. 
 
 La razón de la elección de la temperatura como variable principal en el análisis se basa en que es esencial para el desarrollo del maíz (\cite{Lafitte2001}).
 
@@ -190,11 +188,8 @@ La cobertura temporal abarca el período 2015-2018, dividiendo los años por   s
 
 En cuanto a la cobertura geográfica se centra en Colombia y en los municipios productores del cultivo elegido.
 
-La limitación estaría centrada en el período estudiado para la producción, se ofrecen esos años y nada más.
+La limitación estaría centrada en el período estudiado para la producción.
 
-\subsubsection{Objetivos}
-
-Parafrasear los objetivos del principio.
 
 \subsubsection{Descripción de las fuentes de los datos}
 
@@ -217,7 +212,9 @@ Los formatos en los que se han recogido los datos han sido los siguientes:
 
 A continuación, describimos el plan de gestión de los datos, en el que explicaremos cómo se han creado los datos, se detallará cómo se documentarán, quién podrá obtenerlos y cómo. Se especificará cómo serán almacenados y si serán comparados. 
 
-Para ello, seguiremos el plan desarrollado en la convocatoria del H2020 (\cite{horizon2020dmp2019}). Siguiendo el template desarrollado en la convocatoria del documento del H2020 crearemos unos datos FAIR : Findable, Accessible, Interoperable, Re-usable. Por tanto, los datos creados podrán ser identificados con metadatos accesibles y legibles tanto por máquinas como por personas, gracias al uso de protocolos estándarizados. Y finalmente, estarán bien descritos mediante unos metadatos bien explicados. 
+Para ello, seguiremos el plan desarrollado en la convocatoria del H2020 (\cite{horizon2020dmp2019}). Siguiendo el template desarrollado en la convocatoria del documento del H2020 crearemos unos datos FAIR : Findable, Accessible, Interoperable, Re-usable (\cite{GOFARE2018}). Por tanto, los datos creados podrán ser identificados con metadatos accesibles y legibles tanto por máquinas como por personas, gracias al uso de protocolos estándarizados. Y finalmente, estarán bien descritos mediante unos metadatos bien explicados. 
+
+
 
 \subsection{Data summary}
 
@@ -226,8 +223,7 @@ Para ello, seguiremos el plan desarrollado en la convocatoria del H2020 (\cite{h
 Propósito de la recogida / generación de datos y su relación con los objetivos del proyecto.
 \end{shaded}
 
-El propósito de la recogida y generación de datos es determinar la temperatura y zona de producción óptima de Maíz en Colombia.
-Encontrar una relación entre temperatura y rendimiento de la producción de maíz que permita decidir cuál es el mejor municipio de Colombia para alcanzar una mayor producción de maíz.\\
+El propósito de la recogida y generación de datos es encontrar una relación entre temperatura y rendimiento de la producción de maíz que permita decidir cuál es la temperatura óptima de producción.\\
 
 \begin{shaded}
 ¿Qué tipos y formatos de datos generará o recogerá  el proyecto?
@@ -244,9 +240,9 @@ En cuanto a los formatos en que se han recogido los datos:
     \item Polígonos de veredas en Colombia: formato shp.
 \end{itemize}
 
-Por otra parte el formato de los datos generados es de jupyter notebook, de cara a facilitar la lectura e interpretación del análisis realizado.
+Por otra parte el formato de los datos generados es de csv.
 
-
+\newpage
 \begin{shaded}
 ¿Usaremos datos ya existentes? ¿cómo?
 \end{shaded}
@@ -272,7 +268,7 @@ Teniendo en cuenta que el análisis de los datos se basa mayormente en su gráfi
 \end{shaded}
 Estos datos podrían ser útiles para pequeños agricultures interesados en comenzar a producir maíz, pues la relación temperatura-producción, les permitiría saber si una zona es óptima o no. Reduciendo con mucho el riesgo inicial de producción, no se arriesgan a sembrar en una zona no adaptada climatológicamente para la producción de maíz. Así en el plazo de un año podrían tener ganancias fijas que les permitiesen ampliar zona de cultivo en caso de ser necesario.
 
-
+\newpage
 \subsection{Fair Data}
 
 
@@ -286,7 +282,7 @@ Estos datos podrían ser útiles para pequeños agricultures interesados en come
 \begin{shaded}
 ¿Se pueden encontrar los datos producidos y / o usados en el proyecto con los metadados, identificables y localizables por medio de un mecanismo  de identificación estándar? (por ejemplo, identificadores persistentes y únicos como Digital Object Identifiers (DOIs)?
 \end{shaded}
-Los datos pueden ser encontrados en el siguiente repositorio de github: , junto con este informe en el que se describe su obtención, uso y análisis. 
+Los datos pueden ser encontrados en el siguiente \href{{https://github.com/javialonsaso/maiz_CO}}{repositorio de github} , junto con este informe en el que se describe su obtención, uso y análisis. También es posible encontrar los datos publicados en Zenodo en el repositorio: \href{{10.5281/zenodo.3611494}}{Datos curados de variables de producción por departamento colombiano (2015-2018)}.
 
 \begin{shaded}
 ¿Qué convenciones de nombres se han seguido?
@@ -303,10 +299,6 @@ Las palabras claves proporcionadas son las siguientes: maíz, producción, rendi
 \end{shaded}
 Se han incluido los siguientes metadatos: título, creador, palabras clave, descripción, editor, contribuidor, fecha, tipo, formato, identificador, fuente, idioma, cobertura y derechos.
 
-
-
-
-\textbf{Hacer los datos accesibles}
 %podemos linkear los datos con zenodo
 
 Los data sets estarán disponibles libremente a la comunidad a través de la plataforma de GitHub. En su caso para los data sets originales, se podrán encontrar referenciados en este informe.
@@ -314,7 +306,7 @@ Los data sets estarán disponibles libremente a la comunidad a través de la pla
 \begin{shaded}
 ¿Qué datos producidos y/o utilizados en el proyecto se presentarán abiertamente? Si algunos datasets no pueden ser compartidos (o tienen que serlo bajo ciertas restricciones) explica por qué, separando claramente si el motivo es legal o voluntario. 
 \end{shaded}
-Los data sets usados, i.e. imágenes georreferenciadas de temperatura, polígonos de veredas en Colombia y la producción y rendimiento de maíz en el país son públicos y de libre acceso. En el repositorio se publican el data set original de la producción y rendimiento de maíz, además de los datos transformados de la temperatura en los distintos municipios del país y data set final que agrupa a todos los datos (todos los data sets usados son referenciados a sus repositorios).\\
+Los datasets usados, i.e. imágenes georreferenciadas de temperatura, polígonos de veredas en Colombia y la producción y rendimiento de maíz en el país son públicos y de libre acceso. En el repositorio se publican el data set original de la producción y rendimiento de maíz, además de los datos transformados de la temperatura en los distintos municipios del país y dataset final que agrupa a todos los datos (todos los data sets usados son referenciados a sus repositorios).\\
 %Se harán públicos los datos producidos y de los tres datasets utilizados, tan solo se harán públicos los correspondientes a las imágenes georreferenciadas y a los polígonos de veredas de Colombia, pero no el dataset de la producción de maíz debido a que recientemente el gobierno Colombiano denegó el acceso al público y ahora es un dataset privado. Por tanto, para respetar la medida del gobierno Colombiano, el dataset no se hará público.\\
 
 \begin{shaded}
@@ -350,12 +342,15 @@ Nos apoyaremos en Atribución/Reconocimiento 4.0 Licencia Pública Internacional
 \begin{shaded}
 ¿Cuándo estarán disponibles los datos para su reutilización? Si se busca un embargo para dar tiempo a publicar o buscar patentes, especifique por qué y durante cuánto tiempo se aplicará, teniendo en cuenta que los datos de la investigación deben estar disponibles lo antes posible.
 \end{shaded}
-Los datos están listos de forma libre e inmediata para su reutilización gracias a la plataforma web de GitHub. Los procedimientos realizados para obtener los resultados no están patentados (son scripts de python usando librerías de uso libre). En el caso de que fuera necesario un embargo, sería para búsquedas de patentes de nuestros procedimientos. Esto llegaría a retrasar la publicación de los datos entre una semana como mínimo.
+Los datos están listos de forma libre e inmediata para su reutilización gracias a la plataforma web de GitHub. Los procedimientos realizados para obtener los resultados no están patentados (son scripts de python usando librerías de uso libre). En el caso de que fuera necesario un embargo, sería para búsquedas de patentes de nuestros procedimientos.
 \\
 \begin{shaded}
 ¿Durante cuánto tiempo estarán los datos disponibles para su reúso?
 \end{shaded}
+ESTO CREO QUE NO DEBERÍAMOS PONERLO, ES COMO QUE NOS DESENTENDEMOS DEL TODO
+
 Debido a que los datos se encuentrán disponibles en GitHub, deberían estar permanentemente allí, y si desaparecen, serán por razones ajenas a nosotros.
+
 
 \begin{shaded}
 ¿Se describen los procesos de garantía de calidad de los datos?
@@ -370,7 +365,10 @@ Por otra parte, los datos se encuentran disponibles y de libre acceso. La comuni
 
 \begin{shaded}
 ¿Cúal es el coste de hacer los datos FAIR?
+
 \end{shaded}
+
+AQUí ENTIENDO QUE LA RESPUESTA VA MÁS A A QUE NOS OBLIGA A NOSOTROS EL HACER LOS DATOS FAIR
 Como los datos se encuentran en un repositorio abierto. El acceso es fácil y gratuito. Además, se encuentran en formato \textit{csv}, muchos lenguajes y entornos de programación están preparados para tratar con este formato. Además, los datos estarán disponibles en la base de Zenodo que lleva preparado APIs para conseguir el recurso.
 
 \subsection{Seguridad de los datos}
@@ -402,7 +400,7 @@ Las tres fuentes de datos tuvieron que pasar por un proceso de curación y poste
 Las imágenes georreferenciadas de temperatura superficial, obtenidas a partir del producto MOD11A1, del sensor MODIS abordo del satélite de la NASA Terra EOS AM-1, fueron las primeras en preprocesarse, ya que era necesario adecuar la temporalidad de estos datos (diaria) a la temporalidad de los datos de producción (semestral).
 
 Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, conocidas como bandas, de las cuales se utilizaron dos:
-
+\newpage
 \begin{enumerate}
 	\item LST\_Day\_1km
 	\item LST\_Night\_1km
@@ -446,13 +444,12 @@ El primer repositorio será de acceso público y disponible en la nube para que 
 
 En el segundo nivel utilizaremos discos duros para almacenar los datos y los resultados. Utilizaremos la interfaz SATA puesto que es el más rentable cuanto a espacio. Se montarán sobre una arquitectura RAID 6. De esta forma podemos garantizar la protección de los datos por imperfecciones en los discos utilizando paridad por bloques de memoria en el disco.
 
-Este dispositivo será de acceso exclusivo para los colaboradores del proyecto y recogerá los cambios realizados al repositorio en la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden (Los discos guardan backup incrementales).
+Este dispositivo será de acceso exclusivo para los colaboradores del proyecto y recogerá los cambios realizados al repositorio en la nube. También sirve como un backup a los datos recogidos en la nube si estos se pierden.
 
-El último nivel serán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros). En esta cinta se almacenarán todos los datos de tal forma que si los datos de la nube se pierden, los backups realizados en el disco duro junto con la información en las cintas pueden recuperar el repositorio actualizado (las cintas realizan backups completos del repositorio).
+El último nivel serán cintas magnéticas para el almacenaje. Es el método de más rentabilidad para largo periodo. Como no es un repositorio muy extenso, la prioridad es encontrar el tipo de cinta más rentable (Una cinta LTO-1 son $\approx 20$ euros(\cite{Backupworks.com2020})). En esta cinta se almacenarán todos los datos de tal forma que si los datos de la nube se pierden, los backups realizados en el disco duro junto con la información en las cintas pueden recuperar el repositorio actualizado.
 
 
 Por otra parte, los datos obtenidos en este informe serán subidos a la plataforma web de Zenodo. Gracias a ella, se podrán acceder a sus metadatos de forma limpia y además también con el uso de scripts y la API de Zenodo. Estos son los datos recomendados a usar ya que los encontrados en GitHub son producidos por los scripts del mismo repositorio y sujetos a cambios.
-% https://www.backupworks.com/LTO1-Ultrium-Tape-Media.aspx
 
 
 \section{Análisis de los datos}
@@ -463,15 +460,16 @@ Por otra parte, los datos obtenidos en este informe serán subidos a la platafor
 
 \subsection{Relación entre la producción y el área cosechada}
 
-Comenzamos por comparar la producción que se obtiene de una cosecha según el área cosechada. Esto sirve para observar si existe una regla de proporcionalidad entre las dos variables o existe otra tendencia producida por otros factores (i.e. que una cosecha muy pequeña haya sido cosechada por agricultores locales y no invierten tanto como compañías agrícolas y por eso, el cociente producción, área cosechada es menor).
+Comenzamos por comparar la producción que se obtiene de una cosecha según el área cosechada. Esto sirve para observar si existe una regla de proporcionalidad entre las dos variables o existe otra tendencia producida por otros factores (i.e. la calidad del suelo implica mayor eficiencia en función de la zona y no se cumple una proporción tal que a mayor área mayor producción).
 
 \begin{figure}[H]
-	\includegraphics[width=0.6\linewidth]{./figures/cosecha.png} % 10x10 t=3 dt=0.001 n=10
-	\caption{Distribución de los cultivos según el área cosechada en hectáreas y la producción toneladas. La figura se encuentra en escala logarítmica. Observamos un comportamiento lineal con una pendiente $1.10 \pm 0.11$ por lo que nos encontramos en el régimen lineal.}
+    \centering
+	\includegraphics[width=0.6\textwidth]{figures/cosecha.png} % 10x10 t=3 dt=0.001 n=10
+	\caption{Distribución de los cultivos según el área cosechada en hectáreas y la producción toneladas. La figura se encuentra en escala logarítmica.}
 	\label{fig:cosecha}
 \end{figure}
 
-Podemos observar en la figura (\ref{fig:cosecha}) que existe una relacion de proporcionalidad directa entre la producción en toneladas y el área cosechada. No observamos ninguna tendencia que se desvíe de la proporcionalidad.
+En la figura (\ref{fig:cosecha}) observamos un comportamiento lineal con una pendiente $1.10 \pm 0.11$ por lo que nos encontramos en el régimen lineal. Se da una relacion de proporcionalidad directa entre la producción en toneladas y el área cosechada. No observamos ninguna tendencia que se desvíe de la proporcionalidad.
 
 \subsection{Estudio del rendimiento de las cosechas en función de la temperatura}
 
@@ -479,9 +477,11 @@ Podemos observar en la figura (\ref{fig:cosecha}) que existe una relacion de pro
 Por otro lado, comparamos le rendimiento, esto es, la masa de maíz generado por unidad de área de maíz cosechado. Esperamos que dependiendo de la temperatura, el rendimiento sea variado y que exista una temperatura que produzca la mayor cantidad de rendimiento de la cosecha.
 
 Un vistazo previo a los datos nos revela que la cantidad de ruido es muy elevado y debemos simplificar enormemente el problema. Decidimos coger intervalos de $2.5\degree$C y encontramos la media de temperatura y de rendimiento de ese grupo. Luego los representamos en una gráfica (figura (\ref{fig:rendimiento})).
-
-\begin{figure}[H]
-	\includegraphics[width=0.6\linewidth]{./figures/rendimiento.png} % 10x10 t=3 dt=0.001 n=10
+\newpage
+\begin{figure}
+%\includegraphics[width=1\textwidth]{header.jpg}\par\vspace{1cm}
+    \centering
+	\includegraphics[width=0.6\textwidth]{figures/rendimiento.png} % 10x10 t=3 dt=0.001 n=10
 	\caption{Rendimiento de los cultivos en función de la temperatura en esa época. Los datos han sido agrupados para observar mejor la tendencia y encontrar un pico de rendimiento alrededor de los $20\degree$C. Las barras agrupan cosechas en intervalos de $2.5\degree$C y están centradas según sus temperaturas, su altura es el rendimiento medio del grupo.}
 	\label{fig:rendimiento}
 \end{figure}
@@ -493,7 +493,7 @@ El rendimiento potencial de nuestro modelo hayado es de $131$ toneladas por hect
 
 \section{Conclusiones}
 
-Los datos de Colombia sugieren una temperatura óptima inferior a la sugerida en la literatura \cite{Fisiomaizfenalce2011}.
+Los datos sugieren una temperatura óptima inferior a la sugerida en la literatura \cite{Fisiomaizfenalce2011}.
 Esto puede deberse a otros factores que no se han tenido en cuenta, como la precipitación, la presión atmosférica, la temperatura de la tierra (nuestra variable independiente esla temperatura del aire en la superficie) entre otras.
 
 Por otro lado, se ha comprobado la linealidad de la relación entre la producción y el área de cosecha. Con lo que podemos excluir como factor determinante la calidad del suelo en las diferentes regiones colombianas, no habiendo diferencias significativas en el rendimiento de la cosecha.
@@ -503,7 +503,6 @@ La arquitectura levantada para el mantenimiento y disposición de los datos jueg
 
 
 \newpage
-ANA PASALO A OVERLEAF Y SACA PDF
 
 %\bibliographystyle{apache}
 
@@ -513,5 +512,6 @@ ANA PASALO A OVERLEAF Y SACA PDF
 	\setlength{\bibsep}{20.0pt}
 	\bibliography{referenciasInforme}
 \endgroup
+
 
 \end{document}
