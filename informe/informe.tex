@@ -83,7 +83,7 @@
 \pagenumbering{roman}
 \tableofcontents 
 \listoftables
-\listoffigures
+%\listoffigures
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -111,7 +111,7 @@ El objetivo principal del proyecto es obtener la dependencia de la producción d
 \subsection{Resultados esperados}
 Como primera aproximación, esperamos que a medida la temperatura aumente, también lo haga la producción, con una temperatura óptima asociada a una máxima producción de unos 25ºC. A temperaturas inferiores se espera un rendimiento menor llegando a una producción nula para temperaturas muy bajas.
 
-\newpage
+%\newpage
 
 \subsection{Requisitos}
 
@@ -136,7 +136,7 @@ Para poder generar las fuentes de datos necesarias para el proyecto es necesario
 Atendiendo a la bibliografía encontrada se ha realizado una agrupación de los diferentes municipios de Colombia por zonas: ZAE1 (caribe) , ZAE2 (llanos orientales), ZAE3 (región interandina), ZAE4 (región andina), ZAE5 (región del pacífico)  y ZAE6 (región amazónica) (\cite{FAO2006a}), esto con el objetivo de reducir la variabilidad en las condiciones de siembra y cosecha.
 
 Planteándose el siguiente calendario para la siembra:
-\newpage
+%\newpage
 
 \begin{table}[h!]
     \centering
@@ -242,7 +242,6 @@ En cuanto a los formatos en que se han recogido los datos:
 
 Por otra parte el formato de los datos generados es de csv.
 
-\newpage
 \begin{shaded}
 ¿Usaremos datos ya existentes? ¿cómo?
 \end{shaded}
@@ -268,7 +267,7 @@ Teniendo en cuenta que el análisis de los datos se basa mayormente en su gráfi
 \end{shaded}
 Estos datos podrían ser útiles para pequeños agricultures interesados en comenzar a producir maíz, pues la relación temperatura-producción, les permitiría saber si una zona es óptima o no. Reduciendo con mucho el riesgo inicial de producción, no se arriesgan a sembrar en una zona no adaptada climatológicamente para la producción de maíz. Así en el plazo de un año podrían tener ganancias fijas que les permitiesen ampliar zona de cultivo en caso de ser necesario.
 
-\newpage
+%\newpage
 \subsection{Fair Data}
 
 
@@ -400,7 +399,7 @@ Las tres fuentes de datos tuvieron que pasar por un proceso de curación y poste
 Las imágenes georreferenciadas de temperatura superficial, obtenidas a partir del producto MOD11A1, del sensor MODIS abordo del satélite de la NASA Terra EOS AM-1, fueron las primeras en preprocesarse, ya que era necesario adecuar la temporalidad de estos datos (diaria) a la temporalidad de los datos de producción (semestral).
 
 Cada imagen de temperatura superficial está compuesta por 12 sub-imágenes, conocidas como bandas, de las cuales se utilizaron dos:
-\newpage
+%\newpage
 \begin{enumerate}
 	\item LST\_Day\_1km
 	\item LST\_Night\_1km
@@ -502,7 +501,7 @@ La arquitectura levantada para el mantenimiento y disposición de los datos jueg
 
 
 
-\newpage
+%\newpage
 
 %\bibliographystyle{apache}
 
