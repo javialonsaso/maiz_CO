@@ -23,7 +23,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{gensymb}
 
-\usepackage[natbibapa]{apacite}
+%\usepackage[natbibapa]{apacite}
+\usepackage{natbib}
 %\usepackage[hyphens]{url}
 %\usepackage{hyperref}
 \hypersetup{
@@ -40,6 +41,7 @@
 \oddsidemargin=0cm
 \parindent=0mm
 \pagestyle{plain}
+\bibliographystyle{unsrtnat}
 
 \begin{document}
 \pagenumbering{Alph}
@@ -459,7 +461,7 @@ Por otra parte, los datos obtenidos en este informe serán subidos a la platafor
 
 
 
-\subsubsection{Relación entre la producción y el área cosechada}
+\subsection{Relación entre la producción y el área cosechada}
 
 Comenzamos por comparar la producción que se obtiene de una cosecha según el área cosechada. Esto sirve para observar si existe una regla de proporcionalidad entre las dos variables o existe otra tendencia producida por otros factores (i.e. que una cosecha muy pequeña haya sido cosechada por agricultores locales y no invierten tanto como compañías agrícolas y por eso, el cociente producción, área cosechada es menor).
 
@@ -471,7 +473,7 @@ Comenzamos por comparar la producción que se obtiene de una cosecha según el �
 
 Podemos observar en la figura (\ref{fig:cosecha}) que existe una relacion de proporcionalidad directa entre la producción en toneladas y el área cosechada. No observamos ninguna tendencia que se desvíe de la proporcionalidad.
 
-\subsubsection{Estudio del rendimiento de las cosechas en función de la temperatura}
+\subsection{Estudio del rendimiento de las cosechas en función de la temperatura}
 
 
 Por otro lado, comparamos le rendimiento, esto es, la masa de maíz generado por unidad de área de maíz cosechado. Esperamos que dependiendo de la temperatura, el rendimiento sea variado y que exista una temperatura que produzca la mayor cantidad de rendimiento de la cosecha.
@@ -503,10 +505,13 @@ La arquitectura levantada para el mantenimiento y disposición de los datos jueg
 \newpage
 ANA PASALO A OVERLEAF Y SACA PDF
 
+%\bibliographystyle{apache}
+
+
+
 \begingroup
 	\setlength{\bibsep}{20.0pt}
-    \bibliographystyle{apache}
-    \bibliography{referenciasInforme}
+	\bibliography{referenciasInforme}
 \endgroup
 
 \end{document}
